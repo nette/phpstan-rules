@@ -1,4 +1,8 @@
 parameters:
 
+	fileExtensions:
+		- php
+		- phpt
+
 includes:
 	- extension-php.neon
