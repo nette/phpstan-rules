@@ -5,5 +5,8 @@ parameters:
 		- src
 		- tests
 
+	excludePaths:
+		- tests/*/*.php
+
 includes:
 	- extension.neon
