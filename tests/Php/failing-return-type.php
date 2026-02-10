@@ -32,8 +32,8 @@ assertType('false', zlib_encode('data', ZLIB_ENCODING_GZIP) === false);
 // JSON
 assertType('non-empty-string', json_encode('data'));
 
-// Regex
-function testRegex(string $s): void
+// Regex (constant pattern — |false stripped)
+function testRegexConstant(string $s): void
 {
 	assertType('false', preg_match('/a/', $s) === false);
 	assertType('false', preg_split('/a/', $s) === false);

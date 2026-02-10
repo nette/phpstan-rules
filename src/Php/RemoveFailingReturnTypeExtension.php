@@ -17,7 +17,7 @@ use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\ExpressionTypeResolverExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_merge, explode, str_contains, strtolower;
+use function array_merge, explode, str_contains, str_starts_with, strtolower;
 
 
 /**
@@ -81,8 +81,18 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 		}
 
 		$functionReflection = $this->reflectionProvider->getFunction($expr->name, $scope);
-		if (!isset($this->functions[$functionReflection->getName()])) {
+		$functionName = $functionReflection->getName();
+
+		if (!isset($this->functions[$functionName])) {
 			return null;
+		}
+
+		// preg_* functions return false only for invalid patterns, so skip narrowing for non-constant patterns
+		if (str_starts_with($functionName, 'preg_')) {
+			$args = $expr->getArgs();
+			if ($args === [] || $scope->getType($args[0]->value)->getConstantStrings() === []) {
+				return null;
+			}
 		}
 
 		$parametersAcceptor = ParametersAcceptorSelector::selectFromArgs(
