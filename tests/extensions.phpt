@@ -6,6 +6,7 @@ use Nette\PHPStan\Tester\TypeAssert;
 
 // Php
 TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
+TypeAssert::assertNoErrors(__DIR__ . '/Php/arrow-function-void.php', [__DIR__ . '/Php/arrow-function-void.neon']);
 TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 
 // Schema

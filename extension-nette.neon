@@ -3,3 +3,16 @@ services:
 	-
 		create: Nette\PHPStan\Schema\ExpectArrayReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+
+	# nette/tester
+	-
+		create: Nette\PHPStan\Php\ArrowFunctionVoidIgnoreExtension([
+			test
+			testException
+			testNoError
+			Tester\Assert::exception
+			Tester\Assert::throws
+			Tester\Assert::error
+			Tester\Assert::noError
+		])
+		tags: [phpstan.ignoreErrorExtension]
