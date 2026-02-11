@@ -1,0 +1,5 @@
+# nette/schema
+services:
+	-
+		create: Nette\PHPStan\Schema\ExpectArrayReturnTypeExtension
+		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
