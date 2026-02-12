@@ -8,5 +8,10 @@ parameters:
 	excludePaths:
 		- tests/*/*.php
 
+	ignoreErrors:
+		-
+			identifiers: [phpstanApi.method]
+			path: src/Php/RemoveFailingReturnTypeExtension.php
+
 includes:
 	- extension.neon
