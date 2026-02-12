@@ -20,3 +20,8 @@ services:
 	-
 		create: Nette\PHPStan\Tester\AssertTypeNarrowingExtension
 		tags: [phpstan.typeSpecifier.staticMethodTypeSpecifyingExtension]
+
+	# nette/utils
+	-
+		create: Nette\PHPStan\Utils\StringsReturnTypeExtension
+		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]

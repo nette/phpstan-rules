@@ -16,3 +16,6 @@ TypeAssert::assertTypes(__DIR__ . '/Schema/expect-array-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-narrowing.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-in-function.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-with-custom-class.php');
+
+// Utils
+TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');
