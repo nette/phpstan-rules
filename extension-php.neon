@@ -4,10 +4,14 @@ services:
 			# PHP returns false, but it's trivial — indicates a programming error or unrealistic state
 			# ---------
 
-			# Regex (false = invalid pattern; only stripped when pattern is a constant string)
+			# Regex (false/null = invalid pattern; only stripped when pattern is a constant string)
+			preg_filter
 			preg_grep
 			preg_match
 			preg_match_all
+			preg_replace
+			preg_replace_callback
+			preg_replace_callback_array
 			preg_split
 
 			# JSON

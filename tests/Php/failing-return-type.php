@@ -59,6 +59,35 @@ function testRegexDynamic(string $pattern, string $s): void
 }
 
 
+// Regex replace (constant pattern — |null stripped)
+function testRegexReplaceConstant(string $s): void
+{
+	assertType('string', preg_replace('/a/', 'b', $s));
+	assertType('string', preg_replace_callback('/a/', fn($m) => $m[0], $s));
+	assertType('string', preg_replace_callback_array(['/a/' => fn($m) => $m[0]], $s));
+	assertType('string', preg_filter('/a/', 'b', $s));
+}
+
+
+// Regex replace (UTF-8 validation pattern //u — |null stripped, only preg_match preserves error type)
+function testRegexReplaceUtf8Validation(string $s): void
+{
+	assertType('string', preg_replace('//u', '', $s));
+	assertType('string', preg_replace_callback('//u', fn($m) => '', $s));
+	assertType('string', preg_filter('//u', '', $s));
+}
+
+
+// Regex replace (non-constant pattern — |null preserved)
+function testRegexReplaceDynamic(string $pattern, string $s): void
+{
+	assertType('string|null', preg_replace($pattern, '', $s));
+	assertType('string|null', preg_replace_callback($pattern, fn($m) => '', $s));
+	assertType('string|null', preg_replace_callback_array([$pattern => fn($m) => ''], $s));
+	assertType('string|null', preg_filter($pattern, '', $s));
+}
+
+
 // File operations (need file handle)
 function testFileOps(): void
 {

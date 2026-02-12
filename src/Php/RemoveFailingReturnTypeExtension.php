@@ -17,12 +17,12 @@ use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\ExpressionTypeResolverExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_merge, explode, str_contains, str_starts_with, strlen, strrpos, strtolower, substr;
+use function array_merge, explode, in_array, str_contains, str_starts_with, strlen, strrpos, strtolower, substr;
 
 
 /**
- * Removes false from return types of native PHP functions and methods
- * where false is trivial or outdated.
+ * Removes false or null from return types of native PHP functions and methods
+ * where the error return value is trivial or outdated.
  */
 class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtension
 {
@@ -87,15 +87,18 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 			return null;
 		}
 
-		// preg_* functions return false only for invalid patterns, so skip narrowing for non-constant patterns
-		// Also preserve |false for preg_match with UTF-8 validation patterns like //u where false means invalid UTF-8
+		// preg_* functions return false/null only for invalid patterns, so skip narrowing for non-constant patterns
+		// Also preserve the error type for preg_match with UTF-8 validation patterns like //u where it means invalid UTF-8
 		if (str_starts_with($functionName, 'preg_')) {
 			$args = $expr->getArgs();
 			if ($args === []) {
 				return null;
 			}
 
-			$patternType = $scope->getType($args[0]->value);
+			// preg_replace_callback_array has patterns as array keys, not a direct pattern argument
+			$patternType = $functionName === 'preg_replace_callback_array'
+				? $scope->getType($args[0]->value)->getIterableKeyType()
+				: $scope->getType($args[0]->value);
 			if (
 				$patternType->getConstantStrings() === []
 				|| ($functionName === 'preg_match' && self::isUtf8ValidationPattern($patternType))
@@ -103,6 +106,11 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 				return null;
 			}
 		}
+
+		// preg_replace/filter return null on error (not false like other preg_* functions)
+		$remove = in_array($functionName, ['preg_filter', 'preg_replace', 'preg_replace_callback', 'preg_replace_callback_array'], true)
+			? self::removeNull(...)
+			: self::removeFalse(...);
 
 		$parametersAcceptor = ParametersAcceptorSelector::selectFromArgs(
 			$scope,
@@ -113,18 +121,18 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 
 		$normalizedCall = ArgumentsNormalizer::reorderFuncArguments($parametersAcceptor, $expr);
 		if ($normalizedCall === null) {
-			return self::removeFalse($parametersAcceptor->getReturnType());
+			return $remove($parametersAcceptor->getReturnType());
 		}
 
 		$registry = $this->registryProvider->getRegistry();
 		foreach ($registry->getDynamicFunctionReturnTypeExtensions($functionReflection) as $extension) {
 			$type = $extension->getTypeFromFunctionCall($functionReflection, $normalizedCall, $scope);
 			if ($type !== null) {
-				return self::removeFalse($type);
+				return $remove($type);
 			}
 		}
 
-		return self::removeFalse($parametersAcceptor->getReturnType());
+		return $remove($parametersAcceptor->getReturnType());
 	}
 
 
@@ -290,5 +298,11 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	private static function removeFalse(Type $type): Type
 	{
 		return TypeCombinator::remove($type, new ConstantBooleanType(false));
+	}
+
+
+	private static function removeNull(Type $type): Type
+	{
+		return TypeCombinator::removeNull($type);
 	}
 }
