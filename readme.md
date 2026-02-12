@@ -41,7 +41,7 @@ includes:
 
  <!---->
 
-**Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, and `Expect::array()` based on the arguments you pass.
+**Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass.
 
 **Removes `|false` and `|null` from PHP functions** — many native functions like `getcwd`, `json_encode`, `preg_split`, `preg_replace`, and [many more](extension-php.neon) include `false` or `null` in their return type even though these error values are unrealistic on modern systems.
 
