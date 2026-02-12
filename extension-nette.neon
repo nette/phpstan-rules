@@ -16,3 +16,7 @@ services:
 			Tester\Assert::noError
 		])
 		tags: [phpstan.ignoreErrorExtension]
+
+	-
+		create: Nette\PHPStan\Tester\AssertTypeNarrowingExtension
+		tags: [phpstan.typeSpecifier.staticMethodTypeSpecifyingExtension]

@@ -13,5 +13,6 @@ TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 TypeAssert::assertTypes(__DIR__ . '/Schema/expect-array-return-type.php');
 
 // Tester
+TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-narrowing.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-in-function.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-with-custom-class.php');
