@@ -17,7 +17,7 @@ use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\ExpressionTypeResolverExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_merge, explode, str_contains, str_starts_with, strtolower;
+use function array_merge, explode, str_contains, str_starts_with, strlen, strrpos, strtolower, substr;
 
 
 /**
@@ -88,9 +88,18 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 		}
 
 		// preg_* functions return false only for invalid patterns, so skip narrowing for non-constant patterns
+		// Also preserve |false for preg_match with UTF-8 validation patterns like //u where false means invalid UTF-8
 		if (str_starts_with($functionName, 'preg_')) {
 			$args = $expr->getArgs();
-			if ($args === [] || $scope->getType($args[0]->value)->getConstantStrings() === []) {
+			if ($args === []) {
+				return null;
+			}
+
+			$patternType = $scope->getType($args[0]->value);
+			if (
+				$patternType->getConstantStrings() === []
+				|| ($functionName === 'preg_match' && self::isUtf8ValidationPattern($patternType))
+			) {
 				return null;
 			}
 		}
@@ -250,6 +259,27 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 				if (isset($this->methods[strtolower($ancestorName)][$lowerMethod])) {
 					return true;
 				}
+			}
+		}
+
+		return false;
+	}
+
+
+	/**
+	 * Returns true for UTF-8 validation patterns (empty body + u modifier).
+	 */
+	private static function isUtf8ValidationPattern(Type $patternType): bool
+	{
+		foreach ($patternType->getConstantStrings() as $constant) {
+			$pattern = $constant->getValue();
+			if (
+				strlen($pattern) >= 2
+				&& ($lastPos = strrpos($pattern, $pattern[0], 1)) !== false
+				&& $lastPos === 1 // empty body → delimiter at pos 0 and 1
+				&& str_contains(substr($pattern, 2), 'u')
+			) {
+				return true;
 			}
 		}
 

@@ -41,6 +41,24 @@ function testRegexConstant(string $s): void
 }
 
 
+// Regex (UTF-8 validation pattern //u — |false preserved)
+function testRegexUtf8Validation(string $s): void
+{
+	assertType('bool', preg_match('//u', $s) === false);
+	assertType('false', preg_split('//u', $s) === false);
+	assertType('false', preg_grep('//u', [$s]) === false);
+}
+
+
+// Regex (non-constant pattern — |false preserved)
+function testRegexDynamic(string $pattern, string $s): void
+{
+	assertType('bool', preg_match($pattern, $s) === false);
+	assertType('bool', preg_split($pattern, $s) === false);
+	assertType('bool', preg_grep($pattern, [$s]) === false);
+}
+
+
 // File operations (need file handle)
 function testFileOps(): void
 {
