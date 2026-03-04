@@ -1,3 +1,11 @@
+parameters:
+	universalObjectCratesClasses:
+		- Nette\Bridges\ApplicationLatte\DefaultTemplate
+		- Nette\Database\Row
+		- Nette\Http\SessionSection
+		- Nette\Security\SimpleIdentity
+		- Nette\Utils\Html
+
 # nette/schema
 services:
 	-
