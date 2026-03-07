@@ -27,3 +27,4 @@ TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-with-custom-class.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/false-to-null-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/arrays-invoke-return-type.php');
+TypeAssert::assertTypes(__DIR__ . '/Utils/html-virtual-members.php');
