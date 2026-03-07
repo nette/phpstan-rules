@@ -43,6 +43,8 @@ includes:
 
 **Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass. Also narrows `Container::getComponent()` and `$container['...']` to match the corresponding `createComponent*()` factory return type. For forms, `$form['name']` returns the specific control type (e.g. `TextInput`, `SelectBox`) based on the `addText()`, `addSelect()`, etc. call in the same function.
 
+**Html magic methods** — resolves `$html->getXxx()`, `setXxx()`, and `addXxx()` calls on `Nette\Utils\Html` that go through `__call()` but aren't declared via `@method` annotations.
+
 **Removes `|false` and `|null` from PHP functions** — many native functions like `getcwd`, `json_encode`, `preg_split`, `preg_replace`, and [many more](extension-php.neon) include `false` or `null` in their return type even though these error values are unrealistic on modern systems.
 
 **Assert type narrowing** — PHPStan understands type guarantees after `Tester\Assert` calls like `notNull()`, `type()`, `true()`, etc.
