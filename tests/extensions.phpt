@@ -9,6 +9,9 @@ TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
 TypeAssert::assertNoErrors(__DIR__ . '/Php/arrow-function-void.php', [__DIR__ . '/Php/arrow-function-void.neon']);
 TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 
+// ComponentModel
+TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php');
+
 // Schema
 TypeAssert::assertTypes(__DIR__ . '/Schema/expect-array-return-type.php');
 
