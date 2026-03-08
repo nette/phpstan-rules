@@ -12,6 +12,11 @@ TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 // ComponentModel
 TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php');
 
+// Database
+TypeAssert::assertTypes(__DIR__ . '/Database/explorer-table-return-type.php', [__DIR__ . '/Database/database-row-mapping.neon']);
+TypeAssert::assertTypes(__DIR__ . '/Database/active-row-related-return-type.php', [__DIR__ . '/Database/database-row-mapping.neon']);
+TypeAssert::assertTypes(__DIR__ . '/Database/active-row-ref-return-type.php', [__DIR__ . '/Database/database-row-mapping.neon']);
+
 // Forms
 TypeAssert::assertTypes(__DIR__ . '/Forms/form-component-return-type.php');
 
