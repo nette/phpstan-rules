@@ -13,6 +13,11 @@ services:
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
+	# nette/forms
+	-
+		create: Nette\PHPStan\Forms\FormContainerReturnTypeExtension(@defaultAnalysisParser)
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
 	# nette/schema
 	-
 		create: Nette\PHPStan\Schema\ExpectArrayReturnTypeExtension
