@@ -43,6 +43,18 @@ includes:
 
 **Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass. Also narrows `Container::getComponent()` and `$container['...']` to match the corresponding `createComponent*()` factory return type. For forms, `$form['name']` returns the specific control type (e.g. `TextInput`, `SelectBox`) based on the `addText()`, `addSelect()`, etc. call in the same function.
 
+**Database row mapping** — narrows return types of `Explorer::table()`, `ActiveRow::related()`, and `ActiveRow::ref()` based on a configurable table-to-entity-class convention. For example, `$explorer->table('booking')` returns `Selection<BookingRow>` instead of `Selection<ActiveRow>`. Configure via:
+
+```neon
+parameters:
+    nette:
+        database:
+            mapping:
+                convention: App\Entity\*Row   # * = PascalCase table name
+                tables:                       # optional explicit overrides
+                    special_table: App\Entity\SpecialRow
+```
+
 **Html magic methods** — resolves `$html->getXxx()`, `setXxx()`, and `addXxx()` calls on `Nette\Utils\Html` that go through `__call()` but aren't declared via `@method` annotations.
 
 **Removes `|false` and `|null` from PHP functions** — many native functions like `getcwd`, `json_encode`, `preg_split`, `preg_replace`, and [many more](extension-php.neon) include `false` or `null` in their return type even though these error values are unrealistic on modern systems.

@@ -6,11 +6,41 @@ parameters:
 		- Nette\Security\SimpleIdentity
 		- Nette\Utils\Html
 
+	nette:
+		database:
+			mapping:
+				tables: []
+
+
+parametersSchema:
+	nette: structure([
+		database: structure([
+			mapping: structure([
+				tables: arrayOf(string(), string())
+			])
+		])
+	])
+
 
 services:
 	# nette/component-model
 	-
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	# nette/database
+	nette.database.tableRowTypeResolver:
+		create: Nette\PHPStan\Database\TableRowTypeResolver(
+			tables: %nette.database.mapping.tables%
+		)
+	-
+		create: Nette\PHPStan\Database\ExplorerTableReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\ActiveRowRelatedReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\ActiveRowRefReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
 	# nette/forms
