@@ -7,6 +7,8 @@ parameters:
 		- Nette\Utils\Html
 
 	nette:
+		assets:
+			mapping: []
 		database:
 			mapping:
 				convention: ''
@@ -15,6 +17,9 @@ parameters:
 
 parametersSchema:
 	nette: structure([
+		assets: structure([
+			mapping: arrayOf(string())
+		])
 		database: structure([
 			mapping: structure([
 				convention: string()
@@ -25,6 +30,28 @@ parametersSchema:
 
 
 services:
+	# nette/assets
+	nette.assets.mapperTypeResolver:
+		create: Nette\PHPStan\Assets\MapperTypeResolver(
+			mapping: %nette.assets.mapping%
+		)
+	-
+		create: Nette\PHPStan\Assets\GetMapperReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\MapperGetAssetExtension(
+			className: Nette\Assets\FilesystemMapper
+		)
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\MapperGetAssetExtension(
+			className: Nette\Assets\ViteMapper
+		)
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\RegistryGetAssetExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
 	# nette/component-model
 	-
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension

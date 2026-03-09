@@ -1,0 +1,11 @@
+includes:
+	- ../../extension-nette.neon
+
+parameters:
+	nette:
+		assets:
+			mapping:
+				default: file
+				vite: vite
+				images: file
+				custom: CustomMapper
