@@ -9,6 +9,11 @@ TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
 TypeAssert::assertNoErrors(__DIR__ . '/Php/arrow-function-void.php', [__DIR__ . '/Php/arrow-function-void.neon']);
 TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 
+// Assets
+TypeAssert::assertTypes(__DIR__ . '/Assets/get-mapper-return-type.php', [__DIR__ . '/Assets/assets-mapper-mapping.neon']);
+TypeAssert::assertTypes(__DIR__ . '/Assets/mapper-get-asset-return-type.php', [__DIR__ . '/Assets/assets-mapper-mapping.neon']);
+TypeAssert::assertTypes(__DIR__ . '/Assets/registry-get-asset-return-type.php', [__DIR__ . '/Assets/assets-mapper-mapping.neon']);
+
 // ComponentModel
 TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php');
 

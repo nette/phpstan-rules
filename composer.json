@@ -16,6 +16,7 @@
 		"phpstan/phpstan": "^2.1.40"
 	},
 	"require-dev": {
+		"nette/assets": "^1.0",
 		"nette/component-model": "^3.1",
 		"nette/forms": "^3.2",
 		"nette/schema": "^1.3",

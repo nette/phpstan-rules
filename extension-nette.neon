@@ -6,8 +6,42 @@ parameters:
 		- Nette\Security\SimpleIdentity
 		- Nette\Utils\Html
 
+	nette:
+		assets:
+			mapping: []
+
+
+parametersSchema:
+	nette: structure([
+		assets: structure([
+			mapping: arrayOf(string())
+		])
+	])
+
 
 services:
+	# nette/assets
+	-
+		create: Nette\PHPStan\Assets\MapperTypeResolver(
+			mapping: %nette.assets.mapping%
+		)
+	-
+		create: Nette\PHPStan\Assets\GetMapperReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\MapperGetAssetExtension(
+			className: Nette\Assets\FilesystemMapper
+		)
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\MapperGetAssetExtension(
+			className: Nette\Assets\ViteMapper
+		)
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Assets\RegistryGetAssetExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
 	# nette/component-model
 	-
 		create: Nette\PHPStan\Components\ComponentTreeResolver(@defaultAnalysisParser)
