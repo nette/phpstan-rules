@@ -6,6 +6,7 @@ use Nette\PHPStan\Tester\TypeAssert;
 
 // Php
 TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
+TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 
 // Tester
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-in-function.php');

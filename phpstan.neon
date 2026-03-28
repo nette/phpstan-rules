@@ -12,6 +12,12 @@ parameters:
 		-
 			identifiers: [phpstanApi.method]
 			path: src/Php/RemoveFailingReturnTypeExtension.php
+		-
+			identifiers: [phpstanApi.class, phpstanApi.method]
+			path: src/Php/ClosureTypeCheckIgnoreExtension.php
+		-
+			identifiers: [phpstanApi.classConstant, phpstanApi.method]
+			path: src/Tester/TypeAssert.php
 
 includes:
 	- extension.neon

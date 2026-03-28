@@ -1,5 +1,9 @@
 services:
 	-
+		create: Nette\PHPStan\Php\ClosureTypeCheckIgnoreExtension
+		tags: [phpstan.ignoreErrorExtension]
+
+	-
 		create: Nette\PHPStan\Php\RemoveFailingReturnTypeExtension([
 			# PHP returns false, but it's trivial — indicates a programming error or unrealistic state
 			# ---------

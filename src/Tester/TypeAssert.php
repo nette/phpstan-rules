@@ -4,6 +4,7 @@ namespace Nette\PHPStan\Tester;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
+use PHPStan\Analyser\Analyser;
 use PHPStan\Analyser\NodeScopeResolver;
 use PHPStan\Analyser\Scope;
 use PHPStan\Analyser\ScopeContext;
@@ -71,6 +72,30 @@ class TypeAssert
 				sprintf('on line %d', $assert['line']),
 			);
 		}
+	}
+
+
+	/**
+	 * Analyses a PHP file and verifies that PHPStan reports no errors.
+	 * @param list<string> $configFiles
+	 */
+	public static function assertNoErrors(string $file, array $configFiles = []): void
+	{
+		$container = self::createContainer($configFiles);
+
+		$fileHelper = $container->getByType(FileHelper::class);
+		$file = $fileHelper->normalizePath($file);
+
+		$container->getService('pathRoutingParser')->setAnalysedFiles([$file]);
+
+		$analyser = $container->getByType(Analyser::class);
+		$result = $analyser->analyse([$file]);
+
+		$errors = array_map(
+			static fn($e) => $e->getIdentifier() . ' on line ' . $e->getLine(),
+			$result->getErrors(),
+		);
+		Assert::same([], $errors);
 	}
 
 
