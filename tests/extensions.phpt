@@ -18,4 +18,5 @@ TypeAssert::assertTypes(__DIR__ . '/Tester/assert-in-function.php');
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-with-custom-class.php');
 
 // Utils
+TypeAssert::assertTypes(__DIR__ . '/Utils/false-to-null-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');

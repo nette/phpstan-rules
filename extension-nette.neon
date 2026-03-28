@@ -23,5 +23,8 @@ services:
 
 	# nette/utils
 	-
+		create: Nette\PHPStan\Utils\FalseToNullReturnTypeExtension
+		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+	-
 		create: Nette\PHPStan\Utils\StringsReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
