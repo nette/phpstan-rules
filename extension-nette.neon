@@ -6,6 +6,16 @@ parameters:
 		- Nette\Security\SimpleIdentity
 		- Nette\Utils\Html
 
+	ignoreErrors:
+		-
+			# Form event-handler callbacks (onSuccess, onClick, ...) receive data coerced
+			# via reflection to whatever type the callback declares (stdClass, array, a DTO),
+			# so a data parameter narrower than the declared array|object union is valid at
+			# runtime. Gated on the assigned value being a callable.
+			identifier: assign.propertyType
+			message: '#Property Nette\\Forms\\(Form|Container|Controls\\SubmitButton)::\$on(Success|Error|Submit|Render|Validate|Click|InvalidClick) .* does not accept .*(Closure|callable)\(#'
+			reportUnmatched: false
+
 	nette:
 		assets:
 			mapping: []
