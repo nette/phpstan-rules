@@ -28,7 +28,7 @@ function testRelated(ActiveRow $row): void
 
 	// Unknown table -> falls back to declared return type
 	assertType(
-		'Nette\Database\Table\GroupedSelection',
+		'Nette\Database\Table\GroupedSelection<Nette\Database\Table\ActiveRow>',
 		$row->related('unknown'),
 	);
 }
