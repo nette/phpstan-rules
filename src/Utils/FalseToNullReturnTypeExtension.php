@@ -38,6 +38,10 @@ class FalseToNullReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return null;

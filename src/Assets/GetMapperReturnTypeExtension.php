@@ -41,6 +41,10 @@ class GetMapperReturnTypeExtension implements DynamicMethodReturnTypeExtension
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return $this->resolver->resolveMapper('default');

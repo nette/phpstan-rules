@@ -46,6 +46,10 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		return match ($methodReflection->getName()) {
 			'match' => $this->resolveMatch($methodCall, $scope),
 			'matchAll' => $this->resolveMatchAll($methodCall, $scope),

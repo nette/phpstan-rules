@@ -44,6 +44,10 @@ class RegistryGetAssetExtension implements DynamicMethodReturnTypeExtension
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return null;

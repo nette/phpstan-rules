@@ -38,6 +38,10 @@ class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 		Scope $scope,
 	): ?PhpStanType
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		$args = $methodCall->getArgs();
 		if ($args === []) {
 			return new ObjectType(Type::class);

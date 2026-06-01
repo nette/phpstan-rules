@@ -39,6 +39,10 @@ class ArraysInvokeTypeExtension implements DynamicStaticMethodReturnTypeExtensio
 		Scope $scope,
 	): ?Type
 	{
+		if ($methodCall->isFirstClassCallable()) {
+			return null;
+		}
+
 		return match ($methodReflection->getName()) {
 			'invoke' => $this->resolveInvoke($methodCall, $scope),
 			'invokeMethod' => $this->resolveInvokeMethod($methodCall, $scope),
