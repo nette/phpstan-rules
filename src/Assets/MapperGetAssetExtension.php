@@ -21,8 +21,8 @@ class MapperGetAssetExtension implements DynamicMethodReturnTypeExtension
 	 * @param class-string $className
 	 */
 	public function __construct(
-		private MapperTypeResolver $resolver,
-		private string $className,
+		private readonly MapperTypeResolver $resolver,
+		private readonly string $className,
 	) {
 	}
 

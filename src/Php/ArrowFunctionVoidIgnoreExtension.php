@@ -33,7 +33,7 @@ class ArrowFunctionVoidIgnoreExtension implements IgnoreErrorExtension
 	 */
 	public function __construct(
 		array $items,
-		private ReflectionProvider $reflectionProvider,
+		private readonly ReflectionProvider $reflectionProvider,
 	) {
 		foreach ($items as $item) {
 			if (str_contains($item, '::')) {

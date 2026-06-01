@@ -47,9 +47,9 @@ final class HtmlMethodsClassReflectionExtension implements MethodsClassReflectio
 final class HtmlCallMethodReflection implements MethodReflection
 {
 	public function __construct(
-		private ClassReflection $declaringClass,
-		private string $name,
-		private string $prefix,
+		private readonly ClassReflection $declaringClass,
+		private readonly string $name,
+		private readonly string $prefix,
 	) {
 	}
 

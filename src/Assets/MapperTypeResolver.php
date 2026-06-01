@@ -58,8 +58,8 @@ class MapperTypeResolver
 	 * @param array<string, string> $mapping mapper ID → type keyword ('file', 'vite') or FQCN
 	 */
 	public function __construct(
-		private ReflectionProvider $reflectionProvider,
-		private array $mapping = [],
+		private readonly ReflectionProvider $reflectionProvider,
+		private readonly array $mapping = [],
 	) {
 	}
 

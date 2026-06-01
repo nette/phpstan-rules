@@ -20,7 +20,7 @@ use function count;
 class RegistryGetAssetExtension implements DynamicMethodReturnTypeExtension
 {
 	public function __construct(
-		private MapperTypeResolver $resolver,
+		private readonly MapperTypeResolver $resolver,
 	) {
 	}
 

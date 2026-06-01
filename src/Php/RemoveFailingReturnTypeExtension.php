@@ -38,8 +38,8 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	 */
 	public function __construct(
 		array $items,
-		private DynamicReturnTypeExtensionRegistryProvider $registryProvider,
-		private ReflectionProvider $reflectionProvider,
+		private readonly DynamicReturnTypeExtensionRegistryProvider $registryProvider,
+		private readonly ReflectionProvider $reflectionProvider,
 	) {
 		foreach ($items as $item) {
 			if (str_contains($item, '::')) {

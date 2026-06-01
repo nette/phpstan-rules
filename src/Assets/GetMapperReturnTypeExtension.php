@@ -18,7 +18,7 @@ use function count;
 class GetMapperReturnTypeExtension implements DynamicMethodReturnTypeExtension
 {
 	public function __construct(
-		private MapperTypeResolver $resolver,
+		private readonly MapperTypeResolver $resolver,
 	) {
 	}
 
