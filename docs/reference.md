@@ -175,6 +175,21 @@ A shipped feature, not test-only.
   `tryGetAsset()` → specific asset class; parses the qualified reference; `tryGetAsset()` adds
   `|null`. String refs only.
 
+### Database family (`TableRowTypeResolver` shared service)
+
+`TableRowTypeResolver` resolves table names → entity row class types from a `tables` map
+(single `*` wildcard, bare `*` catch-all; class-name `*` → PascalCase of the capture; exact keys
+beat wildcards, wildcards in declaration order; existence via `ReflectionProvider`). Mirrors
+`Nette\Database\DefaultEntityMapping`. Config parameter `nette.database.mapping.tables`.
+
+- `ExplorerTableReturnTypeExtension` - `Explorer::table()` → `Selection<EntityRow>`.
+- `ActiveRowRelatedReturnTypeExtension` - `ActiveRow::related()` → `GroupedSelection<EntityRow>`
+  (handles `table.column`).
+- `ActiveRowRefReturnTypeExtension` - `ActiveRow::ref()` → `?EntityRow` (preserves nullability).
+- `SelectionInsertReturnTypeExtension` - `Selection::insert()` → the concrete `EntityRow`, but
+  only when the argument is a string-keyed array (single row) **and** the row type `T` is a
+  strict subtype of `ActiveRow`. Bare `ActiveRow` keeps the honest union.
+
 ### InjectPropertyExtension
 
 `ReadWritePropertiesExtension`. Treats `#[Nette\DI\Attributes\Inject]` properties as
