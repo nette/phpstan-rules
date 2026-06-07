@@ -1,0 +1,10 @@
+includes:
+	- ../../extension-nette.neon
+
+parameters:
+	nette:
+		database:
+			mapping:
+				tables:
+					custom_table: CustomEntity
+					*: *Row

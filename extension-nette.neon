@@ -22,12 +22,20 @@ parameters:
 	nette:
 		assets:
 			mapping: []
+		database:
+			mapping:
+				tables: []
 
 
 parametersSchema:
 	nette: structure([
 		assets: structure([
 			mapping: arrayOf(string())
+		])
+		database: structure([
+			mapping: structure([
+				tables: arrayOf(string(), string())
+			])
 		])
 	])
 
@@ -65,6 +73,24 @@ services:
 		create: Nette\PHPStan\Components\ComponentTreeResolver(@defaultAnalysisParser)
 	-
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	# nette/database
+	-
+		create: Nette\PHPStan\Database\TableRowTypeResolver(
+			tables: %nette.database.mapping.tables%
+		)
+	-
+		create: Nette\PHPStan\Database\ExplorerTableReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\ActiveRowRelatedReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\ActiveRowRefReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Database\SelectionInsertReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
 	# nette/di
