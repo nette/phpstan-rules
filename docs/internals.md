@@ -61,12 +61,15 @@ trickiest, worth pointers rather than re-narration:
   `getXxx`/`setXxx`/`addXxx` magic methods on `Nette\Utils\Html` (they go through
   `__call`). `Html` is also a `universalObjectCratesClasses` entry — a second non-local
   touchpoint.
+- **Database family** — all delegate to the shared `TableRowTypeResolver` (wildcard
+  table→entity mapping); `SelectionInsert` narrows only for a string-keyed array **and**
+  a strict `ActiveRow` subtype.
 - **`Utils/ArraysInvokeTypeExtension`** — forwards args through
   `ParametersAcceptorSelector` to pick the right callable overload, `void`→`null`.
 
 **Shared-helper seams are where drift bites:** `StringsRegexHelper` centralizes PREG
 flag mapping for the three Strings extensions *and* `ValidRegularExpressionRule`; the
-Assets families each have a shared resolver. And a **`Rule` receives raw,
+Database/Assets families each have a shared resolver. And a **`Rule` receives raw,
 non-normalized args** (unlike type extensions), so `ValidRegularExpressionRule` must
 resolve the pattern by name-then-position (`StringsRegexHelper::findArg`) or a named-arg
 reorder validates the wrong argument as a regex.
@@ -116,4 +119,4 @@ Registration is entirely NEON, layered: `extension.neon` (entry) → `extension-
 inert until tagged**; the shared services (`ComponentTreeResolver`, `StringsRegexHelper`,
 `TableRowTypeResolver`, `MapperTypeResolver`) are **untagged**, wired by constructor
 injection. Config-driven services carry their knowledge as NEON parameters with a
-`parametersSchema` (asset mapping, the RemoveFailing allowlist).
+`parametersSchema` (asset mapping, database table mapping, the RemoveFailing allowlist).
