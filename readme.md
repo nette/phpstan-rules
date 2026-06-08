@@ -64,6 +64,8 @@ parameters:
 
 **Invalid regex detection** — reports invalid regular expression patterns passed to `Strings::match()`, `matchAll()`, `split()`, and `replace()`, so a malformed pattern is caught during analysis instead of at runtime.
 
+**Subject narrowing after match** — inside `if (Strings::match($s, '#\d+#'))` the subject `$s` is narrowed (e.g. to `non-empty-string`) based on the pattern.
+
 **Assert type narrowing** — PHPStan understands type guarantees after `Tester\Assert` calls like `notNull()`, `type()`, `true()`, etc.
 
 **False positive suppression** — silences known PHPStan false positives in Nette patterns (arrow functions passed as `void` callbacks, runtime type validation closures, callbacks assigned to Form event-handler properties like `$onSuccess`, `$onClick`).

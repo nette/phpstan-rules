@@ -104,6 +104,9 @@ services:
 		create: Nette\PHPStan\Utils\StringsReplaceClosureTypeExtension
 		tags: [phpstan.staticMethodParameterClosureTypeExtension]
 	-
+		create: Nette\PHPStan\Utils\StringsMatchTypeSpecifyingExtension
+		tags: [phpstan.typeSpecifier.staticMethodTypeSpecifyingExtension]
+	-
 		create: Nette\PHPStan\Utils\ArraysInvokeTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
