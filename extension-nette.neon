@@ -6,8 +6,16 @@ parameters:
 		- Nette\Security\SimpleIdentity
 		- Nette\Utils\Html
 
-# nette/schema
+
 services:
+	# nette/component-model
+	-
+		create: Nette\PHPStan\Components\ComponentTreeResolver
+	-
+		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	# nette/schema
 	-
 		create: Nette\PHPStan\Schema\ExpectArrayReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
