@@ -12,6 +12,9 @@ TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 // ComponentModel
 TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php');
 
+// Forms
+TypeAssert::assertTypes(__DIR__ . '/Forms/form-component-return-type.php');
+
 // Schema
 TypeAssert::assertTypes(__DIR__ . '/Schema/expect-array-return-type.php');
 

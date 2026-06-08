@@ -10,9 +10,14 @@ parameters:
 services:
 	# nette/component-model
 	-
-		create: Nette\PHPStan\Components\ComponentTreeResolver
+		create: Nette\PHPStan\Components\ComponentTreeResolver(@defaultAnalysisParser)
 	-
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
+		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
+
+	# nette/forms
+	-
+		create: Nette\PHPStan\Forms\FormContainerReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
 	# nette/schema
