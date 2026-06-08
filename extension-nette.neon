@@ -59,6 +59,11 @@ services:
 		create: Nette\PHPStan\ComponentModel\GetComponentReturnTypeExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
+	# nette/di
+	-
+		create: Nette\PHPStan\DI\InjectPropertyExtension
+		tags: [phpstan.properties.readWriteExtension]
+
 	# nette/forms
 	-
 		create: Nette\PHPStan\Forms\FormContainerReturnTypeExtension

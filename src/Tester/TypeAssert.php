@@ -81,7 +81,9 @@ class TypeAssert
 	 */
 	public static function assertNoErrors(string $file, array $configFiles = []): void
 	{
-		$container = self::createContainer($configFiles);
+		$file = realpath($file);
+		Assert::type('string', $file);
+		$container = self::createContainer($configFiles, $file);
 
 		$fileHelper = $container->getByType(FileHelper::class);
 		$file = $fileHelper->normalizePath($file);

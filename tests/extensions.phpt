@@ -17,6 +17,9 @@ TypeAssert::assertTypes(__DIR__ . '/Assets/registry-get-asset-return-type.php', 
 // ComponentModel
 TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php');
 
+// DI
+TypeAssert::assertNoErrors(__DIR__ . '/DI/inject-property.php');
+
 // Forms
 TypeAssert::assertTypes(__DIR__ . '/Forms/form-component-return-type.php');
 
