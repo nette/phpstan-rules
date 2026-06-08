@@ -9,6 +9,12 @@ TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
 TypeAssert::assertNoErrors(__DIR__ . '/Php/arrow-function-void.php', [__DIR__ . '/Php/arrow-function-void.neon']);
 TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
 
+// Application
+TypeAssert::assertErrors(__DIR__ . '/Application/rethrow-abort-exception.php', [
+	'nette.abortException on line 14',
+	'nette.abortException on line 85',
+]);
+
 // Assets
 TypeAssert::assertTypes(__DIR__ . '/Assets/get-mapper-return-type.php', [__DIR__ . '/Assets/assets-mapper-mapping.neon']);
 TypeAssert::assertTypes(__DIR__ . '/Assets/mapper-get-asset-return-type.php', [__DIR__ . '/Assets/assets-mapper-mapping.neon']);

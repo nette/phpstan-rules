@@ -64,6 +64,8 @@ parameters:
 
 **Invalid regex detection** — reports invalid regular expression patterns passed to `Strings::match()`, `matchAll()`, `split()`, and `replace()`, so a malformed pattern is caught during analysis instead of at runtime.
 
+**AbortException safety** — warns when a broad `catch (\Throwable)` or `catch (\Exception)` in a try block that calls `redirect()`, `forward()`, `terminate()`, etc. swallows `Nette\Application\AbortException` instead of rethrowing it — a mistake that silently breaks redirects.
+
 **Subject narrowing after match** — inside `if (Strings::match($s, '#\d+#'))` the subject `$s` is narrowed (e.g. to `non-empty-string`) based on the pattern.
 
 **Assert type narrowing** — PHPStan understands type guarantees after `Tester\Assert` calls like `notNull()`, `type()`, `true()`, etc.

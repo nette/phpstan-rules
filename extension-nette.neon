@@ -52,6 +52,11 @@ services:
 		create: Nette\PHPStan\Assets\RegistryGetAssetExtension
 		tags: [phpstan.broker.dynamicMethodReturnTypeExtension]
 
+	# nette/application
+	-
+		create: Nette\PHPStan\Application\RethrowAbortExceptionRule
+		tags: [phpstan.rules.rule]
+
 	# nette/component-model
 	-
 		create: Nette\PHPStan\Components\ComponentTreeResolver(@defaultAnalysisParser)
