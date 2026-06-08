@@ -18,6 +18,9 @@ parameters:
 		-
 			identifiers: [phpstanApi.classConstant, phpstanApi.method]
 			path: src/Tester/TypeAssert.php
+		-
+			identifiers: [phpstanApi.constructor]
+			path: src/Utils/StringsReplaceClosureTypeExtension.php
 
 includes:
 	- extension.neon

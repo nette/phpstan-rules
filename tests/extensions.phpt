@@ -34,6 +34,7 @@ TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-with-custom-class.php');
 // Utils
 TypeAssert::assertTypes(__DIR__ . '/Utils/false-to-null-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');
+TypeAssert::assertTypes(__DIR__ . '/Utils/strings-replace-closure.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/arrays-invoke-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/html-virtual-members.php');
 TypeAssert::assertErrors(__DIR__ . '/Utils/valid-regular-expression.php', [
