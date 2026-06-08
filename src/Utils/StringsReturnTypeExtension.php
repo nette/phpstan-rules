@@ -23,12 +23,20 @@ use function in_array;
 
 
 /**
- * Narrows return types of Strings::match(), matchAll() and split()
- * based on boolean arguments like captureOffset, unmatchedAsNull, etc.,
- * resolved via StringsRegexHelper.
+ * Narrows return types of Strings::match(), matchAll() and split().
+ * For match()/matchAll() with a constant pattern it derives the exact array
+ * shape from the regular expression (capture groups) via StringsRegexHelper;
+ * otherwise it falls back to a generic shape based on the boolean arguments
+ * (captureOffset, unmatchedAsNull, patternOrder, lazy).
  */
 class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
 {
+	public function __construct(
+		private readonly StringsRegexHelper $helper,
+	) {
+	}
+
+
 	public function getClass(): string
 	{
 		return Strings::class;
@@ -69,6 +77,15 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 			return null;
 		}
 
+		$patternArg = StringsRegexHelper::findArg($args, 'pattern', 1);
+		if ($patternArg !== null) {
+			$shape = $this->helper->matchShape($patternArg->value, $captureOffset, $unmatchedAsNull, $scope);
+			if ($shape !== null) {
+				return TypeCombinator::addNull($shape);
+			}
+		}
+
+		// fallback: generic shape based on the boolean arguments only
 		$elementType = $this->buildElementType($captureOffset, $unmatchedAsNull);
 		return TypeCombinator::addNull(
 			new ArrayType(new MixedType, $elementType),
@@ -87,6 +104,15 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 			return null;
 		}
 
+		$patternArg = StringsRegexHelper::findArg($args, 'pattern', 1);
+		if (!$lazy && $patternArg !== null) {
+			$shape = $this->helper->matchAllShape($patternArg->value, $captureOffset, $unmatchedAsNull, $patternOrder, $scope);
+			if ($shape !== null) {
+				return $shape;
+			}
+		}
+
+		// fallback: generic shape based on the boolean arguments only
 		$elementType = $this->buildElementType($captureOffset, $unmatchedAsNull);
 
 		if ($lazy) {

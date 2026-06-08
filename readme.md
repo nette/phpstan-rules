@@ -41,7 +41,7 @@ includes:
 
  <!---->
 
-**Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass. Also narrows `Container::getComponent()` and `$container['...']` to match the corresponding `createComponent*()` factory return type. For forms, `$form['name']` returns the specific control type (e.g. `TextInput`, `SelectBox`) based on the `addText()`, `addSelect()`, etc. call in the same function.
+**Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass. For `Strings::match()` and `matchAll()` with a constant pattern, the exact array shape is derived from the regular expression — e.g. `Strings::match($s, '#(\d+)-(\w+)#')` returns `array{string, string, string}|null` with one element per capture group (named groups included). Also narrows `Container::getComponent()` and `$container['...']` to match the corresponding `createComponent*()` factory return type. For forms, `$form['name']` returns the specific control type (e.g. `TextInput`, `SelectBox`) based on the `addText()`, `addSelect()`, etc. call in the same function.
 
 **Asset type narrowing** — narrows return types of `Registry::getMapper()` to the specific mapper class, and `Registry::getAsset()` / `tryGetAsset()` to the specific asset type (e.g. `ImageAsset`, `ScriptAsset`) based on file extension. Also narrows `FilesystemMapper::getAsset()` and `ViteMapper::getAsset()` directly. Configure via:
 
