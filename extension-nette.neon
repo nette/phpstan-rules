@@ -106,3 +106,6 @@ services:
 	-
 		create: Nette\PHPStan\Utils\HtmlMethodsClassReflectionExtension
 		tags: [phpstan.broker.methodsClassReflectionExtension]
+	-
+		create: Nette\PHPStan\Utils\ValidRegularExpressionRule
+		tags: [phpstan.rules.rule]

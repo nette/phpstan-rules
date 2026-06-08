@@ -62,6 +62,8 @@ parameters:
 
 **Injected properties** — properties marked with the `#[Nette\DI\Attributes\Inject]` attribute are treated as initialized and written, so PHPStan won't report them as uninitialized or never written.
 
+**Invalid regex detection** — reports invalid regular expression patterns passed to `Strings::match()`, `matchAll()`, `split()`, and `replace()`, so a malformed pattern is caught during analysis instead of at runtime.
+
 **Assert type narrowing** — PHPStan understands type guarantees after `Tester\Assert` calls like `notNull()`, `type()`, `true()`, etc.
 
 **False positive suppression** — silences known PHPStan false positives in Nette patterns (arrow functions passed as `void` callbacks, runtime type validation closures, callbacks assigned to Form event-handler properties like `$onSuccess`, `$onClick`).

@@ -81,6 +81,18 @@ class TypeAssert
 	 */
 	public static function assertNoErrors(string $file, array $configFiles = []): void
 	{
+		self::assertErrors($file, [], $configFiles);
+	}
+
+
+	/**
+	 * Analyses a PHP file and verifies the reported errors match the expectation.
+	 * Each expected entry has the form "<identifier> on line <number>".
+	 * @param list<string> $expectedErrors
+	 * @param list<string> $configFiles
+	 */
+	public static function assertErrors(string $file, array $expectedErrors, array $configFiles = []): void
+	{
 		$file = realpath($file);
 		Assert::type('string', $file);
 		$container = self::createContainer($configFiles, $file);
@@ -97,7 +109,7 @@ class TypeAssert
 			static fn($e) => $e->getIdentifier() . ' on line ' . $e->getLine(),
 			$result->getErrors(),
 		);
-		Assert::same([], $errors);
+		Assert::same($expectedErrors, $errors);
 	}
 
 

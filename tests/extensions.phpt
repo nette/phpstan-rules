@@ -36,3 +36,10 @@ TypeAssert::assertTypes(__DIR__ . '/Utils/false-to-null-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/arrays-invoke-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/html-virtual-members.php');
+TypeAssert::assertErrors(__DIR__ . '/Utils/valid-regular-expression.php', [
+	'nette.strings.regexpPattern on line 22',
+	'nette.strings.regexpPattern on line 23',
+	'nette.strings.regexpPattern on line 24',
+	'nette.strings.regexpPattern on line 25',
+	'nette.strings.regexpPattern on line 26',
+]);
