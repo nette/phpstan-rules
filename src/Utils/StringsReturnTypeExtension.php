@@ -24,7 +24,8 @@ use function in_array;
 
 /**
  * Narrows return types of Strings::match(), matchAll() and split()
- * based on boolean arguments like captureOffset, unmatchedAsNull, etc.
+ * based on boolean arguments like captureOffset, unmatchedAsNull, etc.,
+ * resolved via StringsRegexHelper.
  */
 class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
 {
@@ -61,8 +62,9 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 
 	private function resolveMatch(StaticCall $call, Scope $scope): ?Type
 	{
-		$captureOffset = $this->resolveBool($call, $scope, 'captureOffset', 2);
-		$unmatchedAsNull = $this->resolveBool($call, $scope, 'unmatchedAsNull', 4);
+		$args = $call->getArgs();
+		$captureOffset = StringsRegexHelper::resolveFlag($args, 'captureOffset', 2, $scope);
+		$unmatchedAsNull = StringsRegexHelper::resolveFlag($args, 'unmatchedAsNull', 4, $scope);
 		if ($captureOffset === null || $unmatchedAsNull === null) {
 			return null;
 		}
@@ -76,10 +78,11 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 
 	private function resolveMatchAll(StaticCall $call, Scope $scope): ?Type
 	{
-		$captureOffset = $this->resolveBool($call, $scope, 'captureOffset', 2);
-		$unmatchedAsNull = $this->resolveBool($call, $scope, 'unmatchedAsNull', 4);
-		$patternOrder = $this->resolveBool($call, $scope, 'patternOrder', 5);
-		$lazy = $this->resolveBool($call, $scope, 'lazy', 7);
+		$args = $call->getArgs();
+		$captureOffset = StringsRegexHelper::resolveFlag($args, 'captureOffset', 2, $scope);
+		$unmatchedAsNull = StringsRegexHelper::resolveFlag($args, 'unmatchedAsNull', 4, $scope);
+		$patternOrder = StringsRegexHelper::resolveFlag($args, 'patternOrder', 5, $scope);
+		$lazy = StringsRegexHelper::resolveFlag($args, 'lazy', 7, $scope);
 		if ($captureOffset === null || $unmatchedAsNull === null || $patternOrder === null || $lazy === null) {
 			return null;
 		}
@@ -110,7 +113,7 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 
 	private function resolveSplit(StaticCall $call, Scope $scope): ?Type
 	{
-		$captureOffset = $this->resolveBool($call, $scope, 'captureOffset', 2);
+		$captureOffset = StringsRegexHelper::resolveFlag($call->getArgs(), 'captureOffset', 2, $scope);
 		if ($captureOffset === null) {
 			return null;
 		}
@@ -150,39 +153,5 @@ class StringsReturnTypeExtension implements DynamicStaticMethodReturnTypeExtensi
 			new ArrayType(IntegerRangeType::createAllGreaterThanOrEqualTo(0), $valueType),
 			new AccessoryArrayListType,
 		]);
-	}
-
-
-	/**
-	 * Resolves a boolean argument by parameter name (named arg) or positional index.
-	 * Returns the default (false) when the argument is not provided.
-	 */
-	private function resolveBool(StaticCall $call, Scope $scope, string $name, int $position): ?bool
-	{
-		$args = $call->getArgs();
-
-		foreach ($args as $arg) {
-			if ($arg->name !== null && $arg->name->toString() === $name) {
-				return self::extractBool($scope->getType($arg->value));
-			}
-		}
-
-		if (isset($args[$position]) && $args[$position]->name === null) {
-			return self::extractBool($scope->getType($args[$position]->value));
-		}
-
-		return false;
-	}
-
-
-	private static function extractBool(Type $type): ?bool
-	{
-		if ($type->isTrue()->yes()) {
-			return true;
-		} elseif ($type->isFalse()->yes()) {
-			return false;
-		}
-
-		return null;
 	}
 }

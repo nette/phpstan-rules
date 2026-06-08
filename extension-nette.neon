@@ -93,6 +93,8 @@ services:
 
 	# nette/utils
 	-
+		create: Nette\PHPStan\Utils\StringsRegexHelper
+	-
 		create: Nette\PHPStan\Utils\FalseToNullReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
