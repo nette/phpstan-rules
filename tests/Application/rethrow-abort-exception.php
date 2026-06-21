@@ -92,6 +92,17 @@ class TestPresenter extends Presenter
 	}
 
 
+	// OK: a dedicated catch (AbortException) is a deliberate swallow (e.g. Presenter::run() ending the lifecycle)
+	public function actionDedicatedSwallow(): void
+	{
+		try {
+			$this->redirect('Home:');
+		} catch (AbortException $e) {
+			// deliberately swallowed
+		}
+	}
+
+
 	/** @throws \Throwable */
 	private function genericOperation(): void
 	{

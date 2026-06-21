@@ -22,8 +22,9 @@ use function array_map, implode, is_array, sprintf;
 /**
  * Reports a try/catch where the try block can throw Nette\Application\AbortException
  * (e.g. via redirect(), forward(), terminate(), sendJson()) but the first catch that
- * would catch it — typically a broad catch (\Throwable) or catch (\Exception) — swallows
- * it instead of rethrowing. Swallowing AbortException silently breaks redirects.
+ * would catch it — a broad catch (\Throwable) or catch (\Exception) — swallows it
+ * instead of rethrowing. Swallowing AbortException silently breaks redirects.
+ * A catch naming AbortException (or a subtype) is a deliberate swallow and is never reported.
  *
  * @implements Rule<TryCatch>
  */
@@ -55,6 +56,13 @@ final class RethrowAbortExceptionRule implements Rule
 			// PHP picks the first catch that matches; that one decides AbortException's fate
 			if (!$caughtType->isSuperTypeOf($abortType)->yes()) {
 				continue;
+			}
+
+			// a catch naming AbortException (or a subtype) is a deliberate swallow
+			foreach ($catch->types as $name) {
+				if ($abortType->isSuperTypeOf(new ObjectType($name->toString()))->yes()) {
+					return [];
+				}
 			}
 
 			if ($this->containsThrow($catch->stmts)) {
