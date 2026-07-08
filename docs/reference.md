@@ -88,6 +88,13 @@ yield no narrowing.
 via `ParametersAcceptorSelector::selectFromArgs()`. `invokeMethod()`: resolves constant method
 names on the object type. `callable(): void` → null. Falls back to declared type otherwise.
 
+### CallbackToReflectionIgnoreExtension
+
+`IgnoreErrorExtension`. Suppresses `argument.type` on the arg of `Nette\Utils\Callback::toReflection()`
+(native param `mixed`, phpDoc `@param callable`, validated at runtime). Narrow match: identifier
+`argument.type` + `StaticCall` `toReflection` on a `Nette\Utils\Callback` caller type. Only
+`toReflection()` qualifies. Tested via `TypeAssert::assertNoErrors()`.
+
 ### HtmlMethodsClassReflectionExtension
 
 `MethodsClassReflectionExtension`. Resolves `getXxx()`/`setXxx()`/`addXxx()` magic methods on

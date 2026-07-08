@@ -43,6 +43,7 @@ TypeAssert::assertTypes(__DIR__ . '/Utils/strings-return-type.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-replace-closure.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/strings-match-narrowing.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/arrays-invoke-return-type.php');
+TypeAssert::assertNoErrors(__DIR__ . '/Utils/callback-to-reflection.php');
 TypeAssert::assertTypes(__DIR__ . '/Utils/html-virtual-members.php');
 TypeAssert::assertErrors(__DIR__ . '/Utils/valid-regular-expression.php', [
 	'nette.strings.regexpPattern on line 22',

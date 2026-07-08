@@ -115,6 +115,9 @@ services:
 		create: Nette\PHPStan\Utils\ArraysInvokeTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 	-
+		create: Nette\PHPStan\Utils\CallbackToReflectionIgnoreExtension
+		tags: [phpstan.ignoreErrorExtension]
+	-
 		create: Nette\PHPStan\Utils\HtmlMethodsClassReflectionExtension
 		tags: [phpstan.broker.methodsClassReflectionExtension]
 	-
