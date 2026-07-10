@@ -108,6 +108,7 @@ services:
 
 			# Other
 			curl_init
+			glob
 
 			# DOM (false = violation of DOM spec rules — programming error)
 			DOMDocument::adoptNode
