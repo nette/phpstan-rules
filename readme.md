@@ -56,6 +56,8 @@ parameters:
                 custom: App\MyMapper            # custom class (FQCN)
 ```
 
+**Interface @property tags** — makes `@property-read`/`@property` annotations on interfaces work. PHPStan core ignores them there, so e.g. `$asset->url` on `Nette\Assets\Asset` reports `property.notFound`; with this extension the read gets the annotated type (nullsafe access included) and the false error is suppressed. Property writes are intentionally left unsupported.
+
 **Html magic methods** — resolves `$html->getXxx()`, `setXxx()`, and `addXxx()` calls on `Nette\Utils\Html` that go through `__call()` but aren't declared via `@method` annotations.
 
 **Runtime-validated callbacks** — `Nette\Utils\Callback::toReflection()` accepts any callback and escalates the validity check to a `ReflectionException` at runtime, so passing a value that can't be statically proven callable (typically a `[class-string, method-name]` tuple) no longer reports a false `argument.type` error.

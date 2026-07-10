@@ -8,6 +8,8 @@ use Nette\PHPStan\Tester\TypeAssert;
 TypeAssert::assertTypes(__DIR__ . '/Php/failing-return-type.php');
 TypeAssert::assertNoErrors(__DIR__ . '/Php/arrow-function-void.php', [__DIR__ . '/Php/arrow-function-void.neon']);
 TypeAssert::assertNoErrors(__DIR__ . '/Php/closure-type-check.php');
+TypeAssert::assertTypes(__DIR__ . '/Php/interface-property-tag.php');
+TypeAssert::assertNoErrors(__DIR__ . '/Php/interface-property-tag-clean.php');
 
 // Application
 TypeAssert::assertErrors(__DIR__ . '/Application/rethrow-abort-exception.php', [

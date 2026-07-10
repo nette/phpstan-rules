@@ -14,6 +14,28 @@ When you add a new extension, add a section here (see AGENTS.md workflow).
 `IgnoreErrorExtension`. Suppresses `expr.resultUnused` for the runtime type-validation
 pattern `(function(Type ...$p) {})(...$args)`.
 
+### Interface `@property` tag support
+
+PHPStan core ignores `@property`/`@property-read` tags on interfaces:
+`ClassReflection::hasProperty()` consults `PropertiesClassReflectionExtension`s only when
+`allowsDynamicProperties()` is true, which on PHP 8.2+ requires `__get`/`__set`/`__isset` -
+so a plain interface (e.g. `Nette\Assets\Asset` with `@property-read string $url`) yields
+`property.notFound` and a custom properties extension is never even called. The workaround
+is a pair of extensions sharing `InterfacePropertyTagResolver` (a plain service):
+
+- `InterfacePropertyTagTypeExtension` (`ExpressionTypeResolverExtension`) resolves the type
+  of a `PropertyFetch` whose var type's class reflections all lack the native property but
+  declare (directly or via an implemented/extended interface) a readable `@property` tag -
+  returns the union of tag types. Bails when `$scope->hasExpressionType($expr)` is yes, so a
+  narrowed type (e.g. after `if ($x->file !== null)`) wins; also bails when any reflection
+  resolves the property natively. Nullsafe reads are covered automatically.
+- `InterfacePropertyTagIgnoreExtension` (`IgnoreErrorExtension`) suppresses `property.notFound`
+  on `PropertyFetch`/`NullsafePropertyFetch` nodes for which the resolver finds a tag type.
+  Writes (virtual `PropertyAssignNode`) are deliberately not suppressed - the tags are read
+  contracts.
+
+Motivated by nette/assets but registered as generic PHP-level behaviour.
+
 ### RemoveFailingReturnTypeExtension
 
 `ExpressionTypeResolverExtension`. Removes `|false` (or `|null` for `preg_*`) from return

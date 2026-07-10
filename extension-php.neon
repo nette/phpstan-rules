@@ -4,6 +4,15 @@ services:
 		tags: [phpstan.ignoreErrorExtension]
 
 	-
+		create: Nette\PHPStan\Php\InterfacePropertyTagResolver
+	-
+		create: Nette\PHPStan\Php\InterfacePropertyTagTypeExtension
+		tags: [phpstan.broker.expressionTypeResolverExtension]
+	-
+		create: Nette\PHPStan\Php\InterfacePropertyTagIgnoreExtension
+		tags: [phpstan.ignoreErrorExtension]
+
+	-
 		create: Nette\PHPStan\Php\RemoveFailingReturnTypeExtension([
 			# PHP returns false, but it's trivial — indicates a programming error or unrealistic state
 			# ---------
