@@ -58,7 +58,7 @@ parameters:
 
 **Html magic methods** — resolves `$html->getXxx()`, `setXxx()`, and `addXxx()` calls on `Nette\Utils\Html` that go through `__call()` but aren't declared via `@method` annotations.
 
-**Removes `|false` and `|null` from PHP functions** — many native functions like `getcwd`, `json_encode`, `preg_split`, `preg_replace`, and [many more](extension-php.neon) include `false` or `null` in their return type even though these error values are unrealistic on modern systems.
+**Removes `|false` and `|null` from PHP functions** — many native functions like `getcwd`, `json_encode`, `preg_split`, `preg_replace`, and [many more](extension-php.neon) include `false` or `null` in their return type even though these error values are unrealistic on modern systems. For `preg_*` functions this applies only to constant patterns. With the `u` modifier, `false` can also mean an invalid UTF-8 subject — this is stripped by design too, so that every regex call doesn't have to double as input validation. Validate untrusted input explicitly with `preg_match('##u', $s)`, whose `false` return type is preserved.
 
 **Injected properties** — properties marked with the `#[Nette\DI\Attributes\Inject]` attribute are treated as initialized and written, so PHPStan won't report them as uninitialized or never written.
 

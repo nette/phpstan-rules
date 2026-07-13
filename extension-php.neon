@@ -8,7 +8,9 @@ services:
 			# PHP returns false, but it's trivial — indicates a programming error or unrealistic state
 			# ---------
 
-			# Regex (false/null = invalid pattern; only stripped when pattern is a constant string)
+			# Regex (only stripped when pattern is a constant string; with /u, false also means
+			# invalid UTF-8 subject — stripped by design, a regex call site should not double as
+			# input validation; validate untrusted input explicitly via preg_match('##u', $s), which keeps false)
 			preg_filter
 			preg_grep
 			preg_match
