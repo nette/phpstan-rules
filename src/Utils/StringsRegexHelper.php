@@ -61,7 +61,7 @@ final class StringsRegexHelper
 		return $this->matcher->matchAllExpr(
 			$patternExpr,
 			new ConstantIntegerType($flags),
-			TrinaryLogic::createYes(),
+			TrinaryLogic::createMaybe(),
 			$scope,
 		);
 	}

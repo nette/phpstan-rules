@@ -71,8 +71,10 @@ removes `false`, adds `null` (`string|false` → `string|null`, `false` → `nul
 
 Consolidates the PREG regex logic shared by the Strings extensions to stop flag mapping
 drifting. Instance, matcher-backed: `matchShape()` (for `match()`), `matchAllShape()` (for
-`matchAll()`) - build the PREG flag mask and call `RegexArrayShapeMatcher` with
-`wasMatched = Yes`; injected into `StringsReturnTypeExtension` and
+`matchAll()`) - build the PREG flag mask and call `RegexArrayShapeMatcher`. `matchShape()`
+passes `wasMatched = Yes` (shape of a successful match; the caller adds `|null` for the
+no-match case), `matchAllShape()` passes `Maybe` (the result may be an empty list; `Yes`
+would make PHPStan infer `non-empty-list`). Injected into `StringsReturnTypeExtension` and
 `StringsReplaceClosureTypeExtension`. Static, stateless: `resolveFlag()` (boolean arg by
 name/position), `findArg()` (arg by name or index) - used by `ValidRegularExpressionRule`
 without pulling in the matcher. `StringsMatchTypeSpecifyingExtension` injects

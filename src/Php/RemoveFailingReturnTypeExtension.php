@@ -10,10 +10,10 @@ use PhpParser\Node\Identifier;
 use PhpParser\Node\Name;
 use PHPStan\Analyser\ArgumentsNormalizer;
 use PHPStan\Analyser\Scope;
-use PHPStan\DependencyInjection\Type\DynamicReturnTypeExtensionRegistryProvider;
 use PHPStan\Reflection\ParametersAcceptorSelector;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\Constant\ConstantBooleanType;
+use PHPStan\Type\DynamicReturnTypeExtensionRegistry;
 use PHPStan\Type\ExpressionTypeResolverExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
@@ -38,7 +38,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	 */
 	public function __construct(
 		array $items,
-		private readonly DynamicReturnTypeExtensionRegistryProvider $registryProvider,
+		private readonly DynamicReturnTypeExtensionRegistry $registry,
 		private readonly ReflectionProvider $reflectionProvider,
 	) {
 		foreach ($items as $item) {
@@ -130,8 +130,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 			return $remove($parametersAcceptor->getReturnType());
 		}
 
-		$registry = $this->registryProvider->getRegistry();
-		foreach ($registry->getDynamicFunctionReturnTypeExtensions($functionReflection) as $extension) {
+		foreach ($this->registry->getDynamicFunctionReturnTypeExtensions($functionReflection) as $extension) {
 			$type = $extension->getTypeFromFunctionCall($functionReflection, $normalizedCall, $scope);
 			if ($type !== null) {
 				return $remove($type);
@@ -173,9 +172,8 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 		}
 
 		$resolvedTypes = [];
-		$registry = $this->registryProvider->getRegistry();
 		foreach ($callerType->getObjectClassNames() as $className) {
-			foreach ($registry->getDynamicMethodReturnTypeExtensionsForClass($className) as $extension) {
+			foreach ($this->registry->getDynamicMethodReturnTypeExtensionsForClass($className) as $extension) {
 				if (!$extension->isMethodSupported($methodReflection)) {
 					continue;
 				}
@@ -232,9 +230,8 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 		}
 
 		$resolvedTypes = [];
-		$registry = $this->registryProvider->getRegistry();
 		foreach ($callerType->getObjectClassNames() as $className) {
-			foreach ($registry->getDynamicStaticMethodReturnTypeExtensionsForClass($className) as $extension) {
+			foreach ($this->registry->getDynamicStaticMethodReturnTypeExtensionsForClass($className) as $extension) {
 				if (!$extension->isStaticMethodSupported($methodReflection)) {
 					continue;
 				}

@@ -6,7 +6,7 @@ use function PHPStan\Testing\assertType;
 
 // $matches shape derived from capture groups
 Strings::replace('subject', '#(\d+)-(\w+)#', function (array $matches): string {
-	assertType('array{non-falsy-string, decimal-int-string, non-empty-string}', $matches);
+	assertType('array{non-falsy-string, numeric-string, non-empty-string}', $matches);
 	return '';
 });
 
@@ -18,6 +18,6 @@ Strings::replace('subject', '#plain#', function (array $matches): string {
 
 // captureOffset adds offsets to every group
 Strings::replace('subject', '#(\d+)#', function (array $matches): string {
-	assertType('array{array{non-empty-string, int<-1, max>}, array{decimal-int-string, int<-1, max>}}', $matches);
+	assertType('array{array{non-empty-string, int<-1, max>}, array{numeric-string, int<-1, max>}}', $matches);
 	return '';
 }, captureOffset: true);

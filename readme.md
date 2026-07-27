@@ -26,7 +26,7 @@ Install via Composer:
 composer require --dev nette/phpstan-rules
 ```
 
-Requirements: PHP 8.1 or higher and PHPStan 2.1+.
+Requirements: PHP 8.1 or higher and PHPStan 2.2.6+.
 
 If you use [phpstan/extension-installer](https://github.com/phpstan/extension-installer), the extension is registered automatically. Otherwise add to your `phpstan.neon`:
 
