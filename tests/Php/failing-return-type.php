@@ -2,7 +2,6 @@
 
 use function PHPStan\Testing\assertType;
 
-
 // === Functions — trivial false ===
 
 // System information
@@ -31,6 +30,7 @@ assertType('false', zlib_encode('data', ZLIB_ENCODING_GZIP) === false);
 
 // JSON
 assertType('non-empty-string', json_encode('data'));
+
 
 // Regex (constant pattern — |false stripped)
 function testRegexConstant(string $s): void
@@ -92,7 +92,7 @@ function testRegexReplaceDynamic(string $pattern, string $s): void
 function testFileOps(): void
 {
 	$f = fopen('php://memory', 'r+');
-	\assert($f !== false);
+	assert($f !== false);
 	assertType('false', fstat($f) === false);
 	assertType('false', ftell($f) === false);
 }

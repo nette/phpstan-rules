@@ -2,6 +2,7 @@
 
 namespace InterfacePropertyTagClean;
 
+
 /**
  * @property-read string $url
  */

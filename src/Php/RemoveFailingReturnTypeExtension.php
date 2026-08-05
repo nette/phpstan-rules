@@ -54,7 +54,8 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 
 	public function getType(Expr $expr, Scope $scope): ?Type
 	{
-		if (($expr instanceof FuncCall || $expr instanceof MethodCall || $expr instanceof StaticCall)
+		if (
+			($expr instanceof FuncCall || $expr instanceof MethodCall || $expr instanceof StaticCall)
 			&& $expr->isFirstClassCallable()
 		) {
 			return null;

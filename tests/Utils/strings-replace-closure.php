@@ -3,7 +3,6 @@
 use Nette\Utils\Strings;
 use function PHPStan\Testing\assertType;
 
-
 // $matches shape derived from capture groups
 Strings::replace('subject', '#(\d+)-(\w+)#', function (array $matches): string {
 	assertType('array{non-falsy-string, numeric-string, non-empty-string}', $matches);

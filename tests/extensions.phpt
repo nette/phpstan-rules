@@ -13,8 +13,8 @@ TypeAssert::assertNoErrors(__DIR__ . '/Php/interface-property-tag-clean.php');
 
 // Application
 TypeAssert::assertErrors(__DIR__ . '/Application/rethrow-abort-exception.php', [
-	'nette.abortException on line 14',
-	'nette.abortException on line 85',
+	'nette.abortException on line 15',
+	'nette.abortException on line 86',
 ]);
 
 // Assets

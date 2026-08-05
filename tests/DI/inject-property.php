@@ -4,6 +4,7 @@ namespace Tests\DI;
 
 use Nette\DI\Attributes\Inject;
 
+
 class InjectedService
 {
 }

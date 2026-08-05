@@ -6,6 +6,7 @@ use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 
+
 class TestPresenter extends Presenter
 {
 	// BAD: catch (\Throwable) swallows AbortException
@@ -13,7 +14,7 @@ class TestPresenter extends Presenter
 	{
 		try {
 			$this->redirect('Home:');
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			// swallowed
 		}
 	}
@@ -48,7 +49,7 @@ class TestPresenter extends Presenter
 	{
 		try {
 			$length = strlen('foo');
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			// nothing aborting here
 		}
 	}
@@ -62,7 +63,7 @@ class TestPresenter extends Presenter
 				$this->error(); // throws BadRequestException
 			}
 			$this->redirect('Home:'); // throws AbortException
-		} catch (BadRequestException $e) {
+		} catch (BadRequestException) {
 			// catches BadRequestException only; AbortException bubbles up
 		}
 	}
@@ -73,7 +74,7 @@ class TestPresenter extends Presenter
 	{
 		try {
 			$this->genericOperation();
-		} catch (\Throwable $e) {
+		} catch (\Throwable) {
 			// no AbortException can reach here
 		}
 	}
@@ -97,7 +98,7 @@ class TestPresenter extends Presenter
 	{
 		try {
 			$this->redirect('Home:');
-		} catch (AbortException $e) {
+		} catch (AbortException) {
 			// deliberately swallowed
 		}
 	}

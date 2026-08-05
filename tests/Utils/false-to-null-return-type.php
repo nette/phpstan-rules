@@ -3,7 +3,6 @@
 use Nette\Utils\Helpers;
 use function PHPStan\Testing\assertType;
 
-
 // false → null
 assertType('null', Helpers::falseToNull(false));
 

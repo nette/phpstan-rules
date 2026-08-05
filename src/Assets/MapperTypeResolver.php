@@ -4,7 +4,10 @@ namespace Nette\PHPStan\Assets;
 
 use Nette\Assets\AudioAsset;
 use Nette\Assets\FilesystemMapper;
-use Nette\Assets\FontAsset, Nette\Assets\ImageAsset, Nette\Assets\ScriptAsset, Nette\Assets\StyleAsset;
+use Nette\Assets\FontAsset;
+use Nette\Assets\ImageAsset;
+use Nette\Assets\ScriptAsset;
+use Nette\Assets\StyleAsset;
 use Nette\Assets\VideoAsset;
 use Nette\Assets\ViteMapper;
 use PHPStan\Reflection\ReflectionProvider;
@@ -54,11 +57,9 @@ class MapperTypeResolver
 	];
 
 
-	/**
-	 * @param array<string, string> $mapping mapper ID → type keyword ('file', 'vite') or FQCN
-	 */
 	public function __construct(
 		private readonly ReflectionProvider $reflectionProvider,
+		/** @var array<string, string> mapper ID → type keyword ('file', 'vite') or FQCN */
 		private readonly array $mapping = [],
 	) {
 	}

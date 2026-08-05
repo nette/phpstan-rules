@@ -4,19 +4,19 @@ use Nette\ComponentModel\Container;
 use function PHPStan\Testing\assertType;
 
 
-class PollControl extends Container implements \ArrayAccess
+class PollControl extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 }
 
-class CalendarControl extends Container implements \ArrayAccess
+class CalendarControl extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 }
 
-class TestPresenter extends Container implements \ArrayAccess
+class TestPresenter extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	protected function createComponentPoll(): PollControl
 	{
@@ -45,14 +45,14 @@ class TestPresenter extends Container implements \ArrayAccess
 
 
 // nested component access: chained ($this['a']['b']) and dash ($this['a-b'])
-class WidgetControl extends Container implements \ArrayAccess
+class WidgetControl extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 }
 
-class PanelControl extends Container implements \ArrayAccess
+class PanelControl extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	protected function createComponentWidget(): WidgetControl
 	{
@@ -60,9 +60,9 @@ class PanelControl extends Container implements \ArrayAccess
 	}
 }
 
-class NestedPresenter extends Container implements \ArrayAccess
+class NestedPresenter extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	protected function createComponentPanel(): PanelControl
 	{
@@ -91,9 +91,9 @@ class NestedPresenter extends Container implements \ArrayAccess
 
 // regression: a non-form control whose factory calls an add*() method must NOT be
 // resolved as a form control, even when the method name collides with Nette\Forms\Container
-class GridControl extends Container implements \ArrayAccess
+class GridControl extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	public function addText(string $name): self
 	{
@@ -101,9 +101,9 @@ class GridControl extends Container implements \ArrayAccess
 	}
 }
 
-class GridPresenter extends Container implements \ArrayAccess
+class GridPresenter extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	protected function createComponentGrid(): GridControl
 	{
@@ -123,9 +123,9 @@ class GridPresenter extends Container implements \ArrayAccess
 
 
 // no factory method → falls back to declared return type
-class EmptyPresenter extends Container implements \ArrayAccess
+class EmptyPresenter extends Container implements ArrayAccess
 {
-	use \Nette\ComponentModel\ArrayAccess;
+	use Nette\ComponentModel\ArrayAccess;
 
 	public function test(): void
 	{

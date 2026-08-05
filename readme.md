@@ -39,7 +39,7 @@ includes:
 
 ## What's Included
 
- <!---->
+ <!---->
 
 **Precise return types** — narrows return types of `Strings::match()`, `matchAll()`, `split()`, `Helpers::falseToNull()`, `Expect::array()`, `Arrays::invoke()`, and `Arrays::invokeMethod()` based on the arguments you pass. For `Strings::match()` and `matchAll()` with a constant pattern, the exact array shape is derived from the regular expression — e.g. `Strings::match($s, '#(\d+)-(\w+)#')` returns `array{string, string, string}|null` with one element per capture group (named groups included). The same shape is inferred for the `$matches` argument of a `Strings::replace()` callback. Also narrows `Container::getComponent()` and `$container['...']` to match the corresponding `createComponent*()` factory return type. For forms, `$form['name']` returns the specific control type (e.g. `TextInput`, `SelectBox`) based on the `addText()`, `addSelect()`, etc. call in the same function.
 
@@ -76,7 +76,7 @@ parameters:
 
 **False positive suppression** — silences known PHPStan false positives in Nette patterns (arrow functions passed as `void` callbacks, runtime type validation closures, callbacks assigned to Form event-handler properties like `$onSuccess`, `$onClick`).
 
- <!---->
+ <!---->
 
 ### Type Assertion Testing Helper
 

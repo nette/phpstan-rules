@@ -17,11 +17,9 @@ use function count;
  */
 class MapperGetAssetExtension implements DynamicMethodReturnTypeExtension
 {
-	/**
-	 * @param class-string $className
-	 */
 	public function __construct(
 		private readonly MapperTypeResolver $resolver,
+		/** @var class-string */
 		private readonly string $className,
 	) {
 	}

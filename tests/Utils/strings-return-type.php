@@ -3,7 +3,6 @@
 use Nette\Utils\Strings;
 use function PHPStan\Testing\assertType;
 
-
 // match() — exact shape from capture groups
 assertType('array{non-falsy-string, numeric-string, non-empty-string}|null', Strings::match('subject', '#(\d+)-(\w+)#'));
 
@@ -35,6 +34,7 @@ assertType('list<array{array{string, int<-1, max>}, array{numeric-string, int<-1
 
 // matchAll() — lazy falls back to a generic Generator shape
 assertType('Generator<int, array<string>, mixed, mixed>', Strings::matchAll('subject', '#(\d+)#', lazy: true));
+
 
 // non-constant pattern falls back to a generic shape
 function dynamicPattern(string $s, string $pattern): void

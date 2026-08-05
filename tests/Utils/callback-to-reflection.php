@@ -2,6 +2,7 @@
 
 use Nette\Utils\Callback;
 
+
 class Foo
 {
 	/** @param array{string, string} $entity */
