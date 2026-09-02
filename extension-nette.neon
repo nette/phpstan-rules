@@ -104,6 +104,9 @@ services:
 	-
 		create: Nette\PHPStan\Schema\ExpectArrayReturnTypeExtension
 		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
+	-
+		create: Nette\PHPStan\Schema\ExpectTypeReturnTypeExtension
+		tags: [phpstan.broker.dynamicStaticMethodReturnTypeExtension]
 
 	# nette/tester
 	-

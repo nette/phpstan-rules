@@ -39,6 +39,7 @@ TypeAssert::assertTypes(__DIR__ . '/Forms/form-component-return-type.php');
 
 // Schema
 TypeAssert::assertTypes(__DIR__ . '/Schema/expect-array-return-type.php');
+TypeAssert::assertTypes(__DIR__ . '/Schema/expect-type-return-type.php');
 
 // Tester
 TypeAssert::assertTypes(__DIR__ . '/Tester/assert-type-narrowing.php');

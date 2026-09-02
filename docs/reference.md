@@ -55,6 +55,15 @@ delegates to them via `DynamicReturnTypeExtensionRegistry`, then strips `|false`
 no arg / null / empty array / non-Schema values → `Type`; all values implement `Schema` →
 `Structure`; mixed/unknown → declared union.
 
+### ExpectTypeReturnTypeExtension
+
+`DynamicStaticMethodReturnTypeExtension`. Narrows `Expect::type()` to the element a constant
+expression builds, so `Expect::type('int')` is a `NumberType` and `Expect::type('int|string')`
+an `AnyOf`. It asks `Expect::type()` itself instead of reading the expression, so the answer
+follows the installed nette/schema - up to 1.3 every expression is a plain `Type`, later
+versions have kind-specific subclasses. A non-constant expression, or one the installed
+version refuses, keeps the declared type.
+
 ### ArrowFunctionVoidIgnoreExtension
 
 `IgnoreErrorExtension`. Suppresses `argument.type` when an arrow function (always returns a
