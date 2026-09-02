@@ -67,6 +67,19 @@ trickiest, worth pointers rather than re-narration:
 - **`Utils/ArraysInvokeTypeExtension`** — forwards args through
   `ParametersAcceptorSelector` to pick the right callable overload, `void`→`null`.
 
+**The Schema pair asks the library instead of reasoning about it.** Every other extension
+here derives the answer from types; `Schema/ExpectTypeReturnTypeExtension` and
+`Schema/ExpectArrayReturnTypeExtension` **call `Expect::type()` / `Expect::array()` during
+analysis** and return the class of the object they get. The reason is that the answer
+depends on the version installed in the analysed project — up to nette/schema 1.3 every
+expression builds a plain `Type`, 1.4 added kind-specific subclasses, 2.0 turned a union
+of different kinds into an `AnyOf` — and asking the library is the only way to stay right
+across all of them without re-implementing its expression language. The price: library
+code runs inside the analysis, so both calls are wrapped in `try/catch (\Throwable)` and
+decline on failure (nette/schema 2.1 refuses legacy expressions with an exception).
+Deprecation notices from such expressions do not surface. Use the trick only for a pure
+factory; anything with side effects has no business running in an analyser.
+
 **Shared-helper seams are where drift bites:** `StringsRegexHelper` centralizes PREG
 flag mapping for the three Strings extensions *and* `ValidRegularExpressionRule`; the
 Database/Assets families each have a shared resolver. And a **`Rule` receives raw,

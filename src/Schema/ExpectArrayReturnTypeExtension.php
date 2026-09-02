@@ -3,7 +3,6 @@
 namespace Nette\PHPStan\Schema;
 
 use Nette\Schema\Elements\Structure;
-use Nette\Schema\Elements\Type;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use PhpParser\Node\Expr\StaticCall;
@@ -15,8 +14,8 @@ use PHPStan\Type\Type as PhpStanType;
 
 
 /**
- * Narrows the return type of Expect::array() from Structure|Type
- * to Structure or Type based on the argument content.
+ * Narrows the return type of Expect::array() by the argument content: a shape of schemas builds
+ * a Structure, anything else the plain array element, which Expect::array() itself is asked for.
  */
 class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExtension
 {
@@ -44,13 +43,13 @@ class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 
 		$args = $methodCall->getArgs();
 		if ($args === []) {
-			return new ObjectType(Type::class);
+			return self::getPlainArrayType();
 		}
 
 		$argType = $scope->getType($args[0]->value);
 
 		if ($argType->isNull()->yes()) {
-			return new ObjectType(Type::class);
+			return self::getPlainArrayType();
 		}
 
 		$constantArrays = $argType->getConstantArrays();
@@ -60,7 +59,7 @@ class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 
 		$valueTypes = $constantArrays[0]->getValueTypes();
 		if ($valueTypes === []) {
-			return new ObjectType(Type::class);
+			return self::getPlainArrayType();
 		}
 
 		$schemaType = new ObjectType(Schema::class);
@@ -80,9 +79,23 @@ class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 		}
 
 		if ($hasNonSchema && !$hasSchema) {
-			return new ObjectType(Type::class);
+			return self::getPlainArrayType();
 		}
 
 		return null;
+	}
+
+
+	/**
+	 * The element Expect::array() builds without a shape; a plain Type up to nette/schema 1.3,
+	 * an ArrayType later.
+	 */
+	private static function getPlainArrayType(): ?PhpStanType
+	{
+		try {
+			return new ObjectType(Expect::array()::class);
+		} catch (\Throwable) {
+			return null;
+		}
 	}
 }

@@ -52,8 +52,9 @@ delegates to them via `DynamicReturnTypeExtensionRegistry`, then strips `|false`
 ### ExpectArrayReturnTypeExtension
 
 `DynamicStaticMethodReturnTypeExtension`. Narrows `Expect::array()` from `Structure|Type`:
-no arg / null / empty array / non-Schema values → `Type`; all values implement `Schema` →
-`Structure`; mixed/unknown → declared union.
+all values implement `Schema` → `Structure`; no arg / null / empty array / non-Schema values →
+the plain array element, which `Expect::array()` itself is asked for, so it follows the
+installed nette/schema (`Type` up to 1.3, `ArrayType` later); mixed/unknown → declared union.
 
 ### ExpectTypeReturnTypeExtension
 
