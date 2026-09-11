@@ -1,0 +1,14 @@
+presets:
+	- nette
+
+paths:
+	- src
+	- tests
+
+fileExtensions:
+	- php
+	- phpt
+
+overrides:
+	- paths: [src]
+	  rules: {global-imports: {functions: optimized}}
