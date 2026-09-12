@@ -21,7 +21,7 @@ public manual is distilled.
 custom rules and dynamic-type extensions applied when analysing Nette libraries.
 Consumed by individual Nette repos via their PHPStan configuration.
 
-- **PHP Version**: 8.2 - 8.5
+- **PHP Version**: 8.2 - 8.6
 - **Package**: `nette/phpstan-rules` (namespace `Nette\PHPStan\`)
 
 ## Essential Commands
