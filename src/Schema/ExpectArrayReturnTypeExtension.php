@@ -75,7 +75,7 @@ class ExpectArrayReturnTypeExtension implements DynamicStaticMethodReturnTypeExt
 			return new ObjectType(Structure::class);
 		}
 
-		if ($hasNonSchema && !$hasSchema) {
+		if (!$hasSchema) {
 			return new ObjectType(Type::class);
 		}
 

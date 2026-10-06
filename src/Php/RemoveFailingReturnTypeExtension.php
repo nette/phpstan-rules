@@ -4,7 +4,7 @@ namespace Nette\PHPStan\Php;
 
 use PhpParser\Node\{Expr, Identifier, Name};
 use PhpParser\Node\Expr\{FuncCall, MethodCall, StaticCall};
-use PHPStan\Analyser\{ArgumentsNormalizer, Scope};
+use PHPStan\Analyser\{ArgumentsNormalizer, DependencyTracker, Scope};
 use PHPStan\Reflection\{ParametersAcceptorSelector, ReflectionProvider};
 use PHPStan\Type\Constant\ConstantBooleanType;
 use PHPStan\Type\{DynamicReturnTypeExtensionRegistry, ExpressionTypeResolverExtension, Type, TypeCombinator};
@@ -43,6 +43,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	}
 
 
+	/** @param Scope&DependencyTracker $scope */
 	public function getType(Expr $expr, Scope $scope): ?Type
 	{
 		if (
@@ -68,6 +69,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	}
 
 
+	/** @param Scope&DependencyTracker $scope */
 	private function resolveFuncCall(FuncCall $expr, Scope $scope): ?Type
 	{
 		if (!$expr->name instanceof Name) {
@@ -133,6 +135,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	}
 
 
+	/** @param Scope&DependencyTracker $scope */
 	private function resolveMethodCall(MethodCall $expr, Scope $scope): ?Type
 	{
 		if (!$expr->name instanceof Identifier) {
@@ -185,6 +188,7 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 	}
 
 
+	/** @param Scope&DependencyTracker $scope */
 	private function resolveStaticCall(StaticCall $expr, Scope $scope): ?Type
 	{
 		if (!$expr->name instanceof Identifier) {
