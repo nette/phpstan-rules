@@ -17,7 +17,7 @@ use PHPStan\Type\DynamicReturnTypeExtensionRegistry;
 use PHPStan\Type\ExpressionTypeResolverExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_merge, explode, in_array, str_contains, str_starts_with, strlen, strrpos, strtolower, substr;
+use function in_array, strlen;
 
 
 /**

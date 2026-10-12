@@ -11,7 +11,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function count, explode, in_array, ucfirst;
+use function count, in_array;
 
 
 /**

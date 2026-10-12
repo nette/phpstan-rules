@@ -16,7 +16,7 @@ use PHPStan\Rules\RuleErrorBuilder;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_map, implode, is_array, sprintf;
+use function is_array, sprintf;
 
 
 /**

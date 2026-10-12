@@ -13,7 +13,7 @@ use PHPStan\Type\Generic\TemplateTypeMap;
 use PHPStan\Type\MixedType;
 use PHPStan\Type\StaticType;
 use PHPStan\Type\Type;
-use function in_array, strlen, substr;
+use function in_array, strlen;
 
 
 /**
