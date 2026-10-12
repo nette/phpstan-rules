@@ -13,7 +13,7 @@ use PHPStan\Type\DynamicMethodReturnTypeExtension;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function count, explode, in_array, is_string;
+use function count, in_array, is_string;
 
 
 /**

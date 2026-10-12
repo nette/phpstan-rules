@@ -12,7 +12,7 @@ use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
 use PHPStan\Type\NullType;
 use PHPStan\Type\Type;
 use PHPStan\Type\TypeCombinator;
-use function array_slice, count, in_array;
+use function count, in_array;
 
 
 /**

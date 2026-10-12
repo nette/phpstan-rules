@@ -12,7 +12,6 @@ use Nette\Assets\VideoAsset;
 use Nette\Assets\ViteMapper;
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
-use function pathinfo, strpos, strtolower, substr;
 
 
 /**

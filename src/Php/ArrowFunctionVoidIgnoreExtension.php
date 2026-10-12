@@ -12,7 +12,6 @@ use PHPStan\Analyser\Error;
 use PHPStan\Analyser\IgnoreErrorExtension;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
-use function explode, preg_match, str_contains, strtolower;
 
 
 /**

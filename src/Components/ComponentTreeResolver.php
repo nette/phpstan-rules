@@ -20,7 +20,7 @@ use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
 use PHPStan\Type\Type;
 use ReflectionNamedType;
-use function array_pop, is_array, is_string, str_starts_with, ucfirst;
+use function is_array, is_string;
 
 
 /**

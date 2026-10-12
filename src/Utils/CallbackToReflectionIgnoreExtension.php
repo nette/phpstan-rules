@@ -11,7 +11,6 @@ use PHPStan\Analyser\Error;
 use PHPStan\Analyser\IgnoreErrorExtension;
 use PHPStan\Analyser\Scope;
 use PHPStan\Type\ObjectType;
-use function strtolower;
 
 
 /**

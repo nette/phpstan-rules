@@ -15,7 +15,7 @@ use PHPStan\ExtensionInstaller\GeneratedConfig;
 use PHPStan\File\FileHelper;
 use PHPStan\Type\VerbosityLevel;
 use Tester\Assert;
-use function array_merge, count, hash, implode, in_array, is_file, is_string, sprintf, strtolower, sys_get_temp_dir;
+use function count, in_array, is_string, sprintf;
 
 
 /**
