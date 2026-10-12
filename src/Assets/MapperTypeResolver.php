@@ -2,14 +2,7 @@
 
 namespace Nette\PHPStan\Assets;
 
-use Nette\Assets\AudioAsset;
-use Nette\Assets\FilesystemMapper;
-use Nette\Assets\FontAsset;
-use Nette\Assets\ImageAsset;
-use Nette\Assets\ScriptAsset;
-use Nette\Assets\StyleAsset;
-use Nette\Assets\VideoAsset;
-use Nette\Assets\ViteMapper;
+use Nette\Assets\{AudioAsset, FilesystemMapper, FontAsset, ImageAsset, ScriptAsset, StyleAsset, VideoAsset, ViteMapper};
 use PHPStan\Reflection\ReflectionProvider;
 use PHPStan\Type\ObjectType;
 

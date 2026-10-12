@@ -6,9 +6,7 @@ use Nette\Assets\Registry;
 use PhpParser\Node\Expr\MethodCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\{DynamicMethodReturnTypeExtension, Type, TypeCombinator};
 use function count;
 
 

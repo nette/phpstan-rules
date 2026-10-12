@@ -4,18 +4,12 @@ namespace Nette\PHPStan\Application;
 
 use Nette\Application\AbortException;
 use PhpParser\Node;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Expr\Throw_;
-use PhpParser\Node\FunctionLike;
-use PhpParser\Node\Name;
+use PhpParser\Node\Expr\{MethodCall, StaticCall, Throw_};
+use PhpParser\Node\{FunctionLike, Name};
 use PhpParser\Node\Stmt\TryCatch;
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleErrorBuilder;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Rules\{Rule, RuleErrorBuilder};
+use PHPStan\Type\{ObjectType, Type, TypeCombinator};
 use function is_array, sprintf;
 
 

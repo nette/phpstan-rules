@@ -2,11 +2,9 @@
 
 namespace Nette\PHPStan\Php;
 
-use PhpParser\Node\Expr;
-use PhpParser\Node\Identifier;
+use PhpParser\Node\{Expr, Identifier};
 use PHPStan\Analyser\Scope;
-use PHPStan\Type\ExpressionTypeResolverExtension;
-use PHPStan\Type\Type;
+use PHPStan\Type\{ExpressionTypeResolverExtension, Type};
 
 
 /**

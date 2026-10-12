@@ -4,21 +4,13 @@ namespace Nette\PHPStan\Components;
 
 use Nette\Forms\Container;
 use PhpParser\Node;
-use PhpParser\Node\Expr;
-use PhpParser\Node\Expr\ArrayDimFetch;
-use PhpParser\Node\Expr\Assign;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\PropertyFetch;
-use PhpParser\Node\Expr\Variable;
-use PhpParser\Node\Identifier;
+use PhpParser\Node\{Expr, Identifier, Stmt};
+use PhpParser\Node\Expr\{ArrayDimFetch, Assign, MethodCall, PropertyFetch, Variable};
 use PhpParser\Node\Scalar\String_;
-use PhpParser\Node\Stmt;
 use PHPStan\Analyser\Scope;
 use PHPStan\Parser\Parser;
-use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ReflectionProvider;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\Type;
+use PHPStan\Reflection\{MethodReflection, ReflectionProvider};
+use PHPStan\Type\{ObjectType, Type};
 use ReflectionNamedType;
 use function is_array, is_string;
 

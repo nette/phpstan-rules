@@ -5,11 +5,8 @@ namespace Nette\PHPStan\Utils;
 use Nette\Utils\Callback;
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Identifier;
-use PhpParser\Node\Name;
-use PHPStan\Analyser\Error;
-use PHPStan\Analyser\IgnoreErrorExtension;
-use PHPStan\Analyser\Scope;
+use PhpParser\Node\{Identifier, Name};
+use PHPStan\Analyser\{Error, IgnoreErrorExtension, Scope};
 use PHPStan\Type\ObjectType;
 
 

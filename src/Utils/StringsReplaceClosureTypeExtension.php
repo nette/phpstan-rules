@@ -5,14 +5,9 @@ namespace Nette\PHPStan\Utils;
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\MethodReflection;
+use PHPStan\Reflection\{MethodReflection, ParameterReflection, PassedByReference};
 use PHPStan\Reflection\Native\NativeParameterReflection;
-use PHPStan\Reflection\ParameterReflection;
-use PHPStan\Reflection\PassedByReference;
-use PHPStan\Type\ClosureType;
-use PHPStan\Type\StaticMethodParameterClosureTypeExtension;
-use PHPStan\Type\StringType;
-use PHPStan\Type\Type;
+use PHPStan\Type\{ClosureType, StaticMethodParameterClosureTypeExtension, StringType, Type};
 
 
 /**

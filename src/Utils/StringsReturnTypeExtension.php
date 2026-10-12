@@ -7,18 +7,9 @@ use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Accessory\AccessoryArrayListType;
-use PHPStan\Type\ArrayType;
-use PHPStan\Type\Constant\ConstantArrayTypeBuilder;
-use PHPStan\Type\Constant\ConstantIntegerType;
-use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
+use PHPStan\Type\{ArrayType, DynamicStaticMethodReturnTypeExtension, IntegerRangeType, IntegerType, IntersectionType, MixedType, StringType, Type, TypeCombinator};
+use PHPStan\Type\Constant\{ConstantArrayTypeBuilder, ConstantIntegerType};
 use PHPStan\Type\Generic\GenericObjectType;
-use PHPStan\Type\IntegerRangeType;
-use PHPStan\Type\IntegerType;
-use PHPStan\Type\IntersectionType;
-use PHPStan\Type\MixedType;
-use PHPStan\Type\StringType;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
 use function in_array;
 
 

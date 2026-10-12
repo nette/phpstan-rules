@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
-use Nette\Assets\FilesystemMapper;
-use Nette\Assets\ViteMapper;
+use Nette\Assets\{FilesystemMapper, ViteMapper};
 use function PHPStan\Testing\assertType;
 
 

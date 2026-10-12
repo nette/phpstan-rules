@@ -4,13 +4,10 @@ namespace Nette\PHPStan\ComponentModel;
 
 use Nette\ComponentModel\Container;
 use Nette\PHPStan\Components\ComponentTreeResolver;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\Variable;
+use PhpParser\Node\Expr\{MethodCall, Variable};
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\{DynamicMethodReturnTypeExtension, Type, TypeCombinator};
 use function count, in_array;
 
 

@@ -3,14 +3,9 @@
 namespace Nette\PHPStan\Php;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Identifier;
-use PhpParser\Node\Name;
-use PHPStan\Analyser\Error;
-use PHPStan\Analyser\IgnoreErrorExtension;
-use PHPStan\Analyser\Scope;
+use PhpParser\Node\Expr\{FuncCall, MethodCall, StaticCall};
+use PhpParser\Node\{Identifier, Name};
+use PHPStan\Analyser\{Error, IgnoreErrorExtension, Scope};
 use PHPStan\Reflection\ReflectionProvider;
 
 

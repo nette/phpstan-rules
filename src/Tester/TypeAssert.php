@@ -4,13 +4,8 @@ namespace Nette\PHPStan\Tester;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
-use PHPStan\Analyser\Analyser;
-use PHPStan\Analyser\NodeScopeResolver;
-use PHPStan\Analyser\Scope;
-use PHPStan\Analyser\ScopeContext;
-use PHPStan\Analyser\ScopeFactory;
-use PHPStan\DependencyInjection\Container;
-use PHPStan\DependencyInjection\ContainerFactory;
+use PHPStan\Analyser\{Analyser, NodeScopeResolver, Scope, ScopeContext, ScopeFactory};
+use PHPStan\DependencyInjection\{Container, ContainerFactory};
 use PHPStan\ExtensionInstaller\GeneratedConfig;
 use PHPStan\File\FileHelper;
 use PHPStan\Type\VerbosityLevel;

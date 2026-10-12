@@ -2,13 +2,11 @@
 
 namespace Nette\PHPStan\Utils;
 
-use Nette\Utils\RegexpException;
-use Nette\Utils\Strings;
+use Nette\Utils\{RegexpException, Strings};
 use PhpParser\Node;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Rules\Rule;
-use PHPStan\Rules\RuleErrorBuilder;
+use PHPStan\Rules\{Rule, RuleErrorBuilder};
 use PHPStan\Type\ObjectType;
 use function in_array, sprintf;
 

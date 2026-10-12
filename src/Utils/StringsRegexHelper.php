@@ -2,8 +2,7 @@
 
 namespace Nette\PHPStan\Utils;
 
-use PhpParser\Node\Arg;
-use PhpParser\Node\Expr;
+use PhpParser\Node\{Arg, Expr};
 use PHPStan\Analyser\Scope;
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\Constant\ConstantIntegerType;

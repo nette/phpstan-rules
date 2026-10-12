@@ -3,8 +3,7 @@
 namespace Nette\PHPStan\Php;
 
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\{Type, TypeCombinator};
 
 
 /**
