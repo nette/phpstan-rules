@@ -4,7 +4,6 @@ use Nette\Schema\Elements\{Structure, Type};
 use Nette\Schema\Expect;
 use function PHPStan\Testing\assertType;
 
-
 // No argument → Type
 assertType(Type::class, Expect::array());
 

@@ -202,10 +202,10 @@ class TypeAssert
 
 		$containerFactory = new ContainerFactory((string) getcwd());
 
-		$allConfigFiles = array_merge(
-			[$containerFactory->getConfigDirectory() . '/config.level8.neon'],
-			$configFiles,
-		);
+		$allConfigFiles = [
+			$containerFactory->getConfigDirectory() . '/config.level8.neon',
+			...$configFiles,
+		];
 
 		$container = $containerFactory->create($tmpDir, $allConfigFiles, $analysedFile ? [$analysedFile] : []);
 		self::$containers[$cacheKey] = $container;

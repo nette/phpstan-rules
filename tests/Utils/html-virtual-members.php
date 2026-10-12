@@ -16,19 +16,19 @@ assertType('string|null', $html->id);
 assertType('mixed', $html->nonExistent);
 
 // @method — fluent setters
-assertType('Nette\Utils\Html', $html->class('foo'));
-assertType('Nette\Utils\Html', $html->checked(true));
-assertType('Nette\Utils\Html', $html->cols(80));
-assertType('Nette\Utils\Html', $html->high(1.0));
+assertType(Html::class, $html->class('foo'));
+assertType(Html::class, $html->checked(true));
+assertType(Html::class, $html->cols(80));
+assertType(Html::class, $html->high(1.0));
 
 // @method — with second argument (appendAttribute)
-assertType('Nette\Utils\Html', $html->class('foo', true));
+assertType(Html::class, $html->class('foo', true));
 
 // __call — getXxx(), setXxx(), addXxx()
 assertType('mixed', $html->getClass());
-assertType('Nette\Utils\Html', $html->setClass('foo'));
-assertType('Nette\Utils\Html', $html->addClass('bar'));
+assertType(Html::class, $html->setClass('foo'));
+assertType(Html::class, $html->addClass('bar'));
 
 // real methods — return static
-assertType('Nette\Utils\Html', $html->href('/path'));
-assertType('Nette\Utils\Html', $html->data('key', 'value'));
+assertType(Html::class, $html->href('/path'));
+assertType(Html::class, $html->data('key', 'value'));

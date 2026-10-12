@@ -11,7 +11,7 @@ use function PHPStan\Testing\assertType;
  */
 interface Asset
 {
-	public function __toString(): string;
+	function __toString(): string;
 }
 
 interface RenderableAsset extends Asset
