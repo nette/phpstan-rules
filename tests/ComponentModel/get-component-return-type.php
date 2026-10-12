@@ -83,8 +83,8 @@ class NestedPresenter extends Container implements ArrayAccess
 		assertType('WidgetControl|null', $this->getComponent('panel-widget', false));
 
 		// unknown segment → declared type kept
-		assertType('Nette\ComponentModel\IComponent', $this['panel-unknown']);
-		assertType('Nette\ComponentModel\IComponent', $this['unknown-widget']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['panel-unknown']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['unknown-widget']);
 	}
 }
 
@@ -116,8 +116,8 @@ class GridPresenter extends Container implements ArrayAccess
 	public function test(): void
 	{
 		// must stay the declared type, not become Nette\Forms\Controls\TextInput
-		assertType('Nette\ComponentModel\IComponent', $this['grid']['name']);
-		assertType('Nette\ComponentModel\IComponent', $this['grid-name']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['grid']['name']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['grid-name']);
 	}
 }
 
@@ -129,8 +129,8 @@ class EmptyPresenter extends Container implements ArrayAccess
 
 	public function test(): void
 	{
-		assertType('Nette\ComponentModel\IComponent', $this->getComponent('unknown'));
-		assertType('Nette\ComponentModel\IComponent', $this['unknown']);
+		assertType(Nette\ComponentModel\IComponent::class, $this->getComponent('unknown'));
+		assertType(Nette\ComponentModel\IComponent::class, $this['unknown']);
 
 		// $throw = false → nullable (falls back to declared conditional return type)
 		assertType('Nette\ComponentModel\IComponent|null', $this->getComponent('unknown', false));

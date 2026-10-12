@@ -198,14 +198,14 @@ class TypeAssert
 		}
 
 		$tmpDir = sys_get_temp_dir() . '/phpstan-tests';
-		@mkdir($tmpDir, 0o777, true); // @ - directory may already exist
+		@mkdir($tmpDir, recursive: true); // @ - directory may already exist
 
 		$containerFactory = new ContainerFactory((string) getcwd());
 
-		$allConfigFiles = array_merge(
-			[$containerFactory->getConfigDirectory() . '/config.level8.neon'],
-			$configFiles,
-		);
+		$allConfigFiles = [
+			$containerFactory->getConfigDirectory() . '/config.level8.neon',
+			...$configFiles,
+		];
 
 		$container = $containerFactory->create($tmpDir, $allConfigFiles, $analysedFile ? [$analysedFile] : []);
 		self::$containers[$cacheKey] = $container;

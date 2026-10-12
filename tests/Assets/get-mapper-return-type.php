@@ -16,20 +16,20 @@ class CustomMapper implements Nette\Assets\Mapper
 function testGetMapper(Registry $registry): void
 {
 	// Default mapper (no argument)
-	assertType('Nette\Assets\FilesystemMapper', $registry->getMapper());
+	assertType(Nette\Assets\FilesystemMapper::class, $registry->getMapper());
 
 	// Explicit 'default'
-	assertType('Nette\Assets\FilesystemMapper', $registry->getMapper('default'));
+	assertType(Nette\Assets\FilesystemMapper::class, $registry->getMapper('default'));
 
 	// Named mapper
-	assertType('Nette\Assets\ViteMapper', $registry->getMapper('vite'));
+	assertType(Nette\Assets\ViteMapper::class, $registry->getMapper('vite'));
 
 	// Another named mapper
-	assertType('Nette\Assets\FilesystemMapper', $registry->getMapper('images'));
+	assertType(Nette\Assets\FilesystemMapper::class, $registry->getMapper('images'));
 
 	// Custom mapper class (FQCN in config)
 	assertType('CustomMapper', $registry->getMapper('custom'));
 
 	// Unknown mapper -> falls back to declared return type
-	assertType('Nette\Assets\Mapper', $registry->getMapper('unknown'));
+	assertType(Nette\Assets\Mapper::class, $registry->getMapper('unknown'));
 }

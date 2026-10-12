@@ -25,7 +25,7 @@ final class InterfacePropertyTagResolver
 
 		$types = [];
 		foreach ($reflections as $reflection) {
-			if ($reflection->hasProperty($propertyName)) {
+			if ($reflection->hasInstanceProperty($propertyName)) {
 				return null; // PHPStan resolves the property itself
 			}
 

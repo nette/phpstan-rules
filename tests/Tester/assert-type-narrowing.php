@@ -32,7 +32,7 @@ function testFalse(mixed $val): void
 }
 
 
-function testTruthy(stdClass|null $val): void
+function testTruthy(?stdClass $val): void
 {
 	Assert::truthy($val);
 	assertType('stdClass', $val);
@@ -53,7 +53,7 @@ function testSame(int|string $val): void
 }
 
 
-function testNotSame(int|null $val): void
+function testNotSame(?int $val): void
 {
 	Assert::notSame(null, $val);
 	assertType('int', $val);

@@ -193,12 +193,10 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 
 		$methodName = $expr->name->name;
 
-		if ($expr->class instanceof Name) {
-			$callerType = $scope->resolveTypeByName($expr->class);
-		} else {
-			$callerType = TypeCombinator::removeNull($scope->getType($expr->class))
+		$callerType = $expr->class instanceof Name
+			? $scope->resolveTypeByName($expr->class)
+			: TypeCombinator::removeNull($scope->getType($expr->class))
 				->getObjectTypeOrClassStringObjectType();
-		}
 
 		if (!$this->isMethodSupportedByType($callerType, $methodName)) {
 			return null;
@@ -252,11 +250,11 @@ class RemoveFailingReturnTypeExtension implements ExpressionTypeResolverExtensio
 			}
 
 			$classReflection = $this->reflectionProvider->getClass($className);
-			$classesToCheck = array_merge(
-				[$classReflection->getName()],
-				$classReflection->getParentClassesNames(),
-				$classReflection->getNativeReflection()->getInterfaceNames(),
-			);
+			$classesToCheck = [
+				$classReflection->getName(),
+				...$classReflection->getParentClassesNames(),
+				...$classReflection->getNativeReflection()->getInterfaceNames(),
+			];
 
 			foreach ($classesToCheck as $ancestorName) {
 				if (isset($this->methods[strtolower($ancestorName)][$lowerMethod])) {

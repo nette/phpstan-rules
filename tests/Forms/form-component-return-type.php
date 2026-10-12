@@ -9,9 +9,9 @@ function testAddText(): void
 	$form = new Form;
 	$form->addText('name', 'Name:');
 	$form->addPassword('password', 'Password:');
-	assertType('Nette\Forms\Controls\TextInput', $form['name']);
-	assertType('Nette\Forms\Controls\TextInput', $form->getComponent('name'));
-	assertType('Nette\Forms\Controls\TextInput', $form['password']);
+	assertType(Nette\Forms\Controls\TextInput::class, $form['name']);
+	assertType(Nette\Forms\Controls\TextInput::class, $form->getComponent('name'));
+	assertType(Nette\Forms\Controls\TextInput::class, $form['password']);
 
 	// $throw = false → nullable
 	assertType('Nette\Forms\Controls\TextInput|null', $form->getComponent('name', false));
@@ -23,8 +23,8 @@ function testAddSelect(): void
 	$form = new Form;
 	$form->addSelect('country', 'Country:', ['CZ' => 'Czech Republic']);
 	$form->addMultiSelect('tags', 'Tags:', ['a' => 'A', 'b' => 'B']);
-	assertType('Nette\Forms\Controls\SelectBox', $form['country']);
-	assertType('Nette\Forms\Controls\MultiSelectBox', $form['tags']);
+	assertType(Nette\Forms\Controls\SelectBox::class, $form['country']);
+	assertType(Nette\Forms\Controls\MultiSelectBox::class, $form['tags']);
 }
 
 
@@ -34,9 +34,9 @@ function testAddCheckbox(): void
 	$form->addCheckbox('agree', 'I agree');
 	$form->addCheckboxList('colors', 'Colors:', ['r' => 'Red']);
 	$form->addRadioList('gender', 'Gender:', ['m' => 'Male']);
-	assertType('Nette\Forms\Controls\Checkbox', $form['agree']);
-	assertType('Nette\Forms\Controls\CheckboxList', $form['colors']);
-	assertType('Nette\Forms\Controls\RadioList', $form['gender']);
+	assertType(Nette\Forms\Controls\Checkbox::class, $form['agree']);
+	assertType(Nette\Forms\Controls\CheckboxList::class, $form['colors']);
+	assertType(Nette\Forms\Controls\RadioList::class, $form['gender']);
 }
 
 
@@ -50,13 +50,13 @@ function testAddOther(): void
 	$form->addSubmit('send', 'Send');
 	$form->addButton('cancel', 'Cancel');
 	$form->addUpload('avatar', 'Avatar:');
-	assertType('Nette\Forms\Controls\TextArea', $form['bio']);
-	assertType('Nette\Forms\Controls\TextInput', $form['email']);
-	assertType('Nette\Forms\Controls\TextInput', $form['age']);
-	assertType('Nette\Forms\Controls\HiddenField', $form['token']);
-	assertType('Nette\Forms\Controls\SubmitButton', $form['send']);
-	assertType('Nette\Forms\Controls\Button', $form['cancel']);
-	assertType('Nette\Forms\Controls\UploadControl', $form['avatar']);
+	assertType(Nette\Forms\Controls\TextArea::class, $form['bio']);
+	assertType(Nette\Forms\Controls\TextInput::class, $form['email']);
+	assertType(Nette\Forms\Controls\TextInput::class, $form['age']);
+	assertType(Nette\Forms\Controls\HiddenField::class, $form['token']);
+	assertType(Nette\Forms\Controls\SubmitButton::class, $form['send']);
+	assertType(Nette\Forms\Controls\Button::class, $form['cancel']);
+	assertType(Nette\Forms\Controls\UploadControl::class, $form['avatar']);
 }
 
 
@@ -64,20 +64,20 @@ function testAddContainer(): void
 {
 	$form = new Form;
 	$form->addContainer('address');
-	assertType('Nette\Forms\Container', $form['address']);
+	assertType(Nette\Forms\Container::class, $form['address']);
 }
 
 
 function testUnknownComponent(): void
 {
 	$form = new Form;
-	assertType('Nette\Forms\Controls\BaseControl', $form['unknown']);
+	assertType(Nette\Forms\Controls\BaseControl::class, $form['unknown']);
 }
 
 
 function testFallbackFromOtherMethod(Form $form): void
 {
-	assertType('Nette\Forms\Controls\BaseControl', $form['unknown']);
+	assertType(Nette\Forms\Controls\BaseControl::class, $form['unknown']);
 }
 
 
@@ -99,25 +99,25 @@ class CrossMethodPresenter extends Nette\ComponentModel\Container implements Arr
 	public function test(): void
 	{
 		$form = $this['myForm'];
-		assertType('Nette\Forms\Controls\TextInput', $form['name']);
-		assertType('Nette\Forms\Controls\SelectBox', $form['country']);
-		assertType('Nette\Forms\Controls\SubmitButton', $form['send']);
+		assertType(Nette\Forms\Controls\TextInput::class, $form['name']);
+		assertType(Nette\Forms\Controls\SelectBox::class, $form['country']);
+		assertType(Nette\Forms\Controls\SubmitButton::class, $form['send']);
 
 		// chained access without an intermediate variable
-		assertType('Nette\Forms\Controls\TextInput', $this['myForm']['name']);
-		assertType('Nette\Forms\Controls\SelectBox', $this->getComponent('myForm')['country']);
+		assertType(Nette\Forms\Controls\TextInput::class, $this['myForm']['name']);
+		assertType(Nette\Forms\Controls\SelectBox::class, $this->getComponent('myForm')['country']);
 
 		// dash notation
-		assertType('Nette\Forms\Controls\TextInput', $this['myForm-name']);
-		assertType('Nette\Forms\Controls\SubmitButton', $this['myForm-send']);
+		assertType(Nette\Forms\Controls\TextInput::class, $this['myForm-name']);
+		assertType(Nette\Forms\Controls\SubmitButton::class, $this['myForm-send']);
 
 		// $throw = false at the end of a dash path
 		assertType('Nette\Forms\Controls\TextInput|null', $this->getComponent('myForm-name', false));
 
 		// unknown field: chained resolves the form (BaseControl), dash falls back to the
 		// presenter's declared type (IComponent) - both safe, never a wrong type
-		assertType('Nette\Forms\Controls\BaseControl', $this['myForm']['unknown']);
-		assertType('Nette\ComponentModel\IComponent', $this['myForm-unknown']);
+		assertType(Nette\Forms\Controls\BaseControl::class, $this['myForm']['unknown']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['myForm-unknown']);
 	}
 }
 
@@ -138,9 +138,9 @@ class SubContainerPresenter extends Nette\ComponentModel\Container implements Ar
 
 	public function test(): void
 	{
-		assertType('Nette\Forms\Container', $this['myForm']['address']);
-		assertType('Nette\Forms\Controls\BaseControl', $this['myForm']['address']['street']);
-		assertType('Nette\ComponentModel\IComponent', $this['myForm-address-street']);
+		assertType(Nette\Forms\Container::class, $this['myForm']['address']);
+		assertType(Nette\Forms\Controls\BaseControl::class, $this['myForm']['address']['street']);
+		assertType(Nette\ComponentModel\IComponent::class, $this['myForm-address-street']);
 	}
 }
 
@@ -161,7 +161,7 @@ class FormFactory
 class CrossClassConsumer
 {
 	public function __construct(
-		private FormFactory $factory,
+		private readonly FormFactory $factory,
 	) {
 	}
 
@@ -169,9 +169,9 @@ class CrossClassConsumer
 	public function test(): void
 	{
 		$form = $this->factory->createForm();
-		assertType('Nette\Forms\Controls\TextInput', $form['name']);
-		assertType('Nette\Forms\Controls\SelectBox', $form['country']);
-		assertType('Nette\Forms\Controls\SubmitButton', $form['send']);
+		assertType(Nette\Forms\Controls\TextInput::class, $form['name']);
+		assertType(Nette\Forms\Controls\SelectBox::class, $form['country']);
+		assertType(Nette\Forms\Controls\SubmitButton::class, $form['send']);
 	}
 }
 
@@ -198,9 +198,9 @@ class MixedPresenter extends Nette\ComponentModel\Container implements ArrayAcce
 	public function test(): void
 	{
 		$form = $this['myForm'];
-		assertType('Nette\Forms\Controls\TextInput', $form['name']);
-		assertType('Nette\Forms\Controls\SelectBox', $form['country']);
-		assertType('Nette\Forms\Controls\SubmitButton', $form['send']);
-		assertType('Nette\Forms\Controls\Button', $form['cancel']);
+		assertType(Nette\Forms\Controls\TextInput::class, $form['name']);
+		assertType(Nette\Forms\Controls\SelectBox::class, $form['country']);
+		assertType(Nette\Forms\Controls\SubmitButton::class, $form['send']);
+		assertType(Nette\Forms\Controls\Button::class, $form['cancel']);
 	}
 }
