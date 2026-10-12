@@ -7,11 +7,7 @@ use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Constant\ConstantBooleanType;
-use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
-use PHPStan\Type\NeverType;
-use PHPStan\Type\NullType;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\{DynamicStaticMethodReturnTypeExtension, NeverType, NullType, Type, TypeCombinator};
 
 
 /**

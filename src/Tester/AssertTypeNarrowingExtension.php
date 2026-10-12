@@ -2,21 +2,10 @@
 
 namespace Nette\PHPStan\Tester;
 
-use PhpParser\Node\Arg;
-use PhpParser\Node\Expr;
-use PhpParser\Node\Expr\BinaryOp\Identical;
-use PhpParser\Node\Expr\BinaryOp\NotIdentical;
-use PhpParser\Node\Expr\BooleanNot;
-use PhpParser\Node\Expr\ConstFetch;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\Instanceof_;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Name;
-use PHPStan\Analyser\Scope;
-use PHPStan\Analyser\SpecifiedTypes;
-use PHPStan\Analyser\TypeSpecifier;
-use PHPStan\Analyser\TypeSpecifierAwareExtension;
-use PHPStan\Analyser\TypeSpecifierContext;
+use PhpParser\Node\{Arg, Expr, Name};
+use PhpParser\Node\Expr\BinaryOp\{Identical, NotIdentical};
+use PhpParser\Node\Expr\{BooleanNot, ConstFetch, FuncCall, Instanceof_, StaticCall};
+use PHPStan\Analyser\{Scope, SpecifiedTypes, TypeSpecifier, TypeSpecifierAwareExtension, TypeSpecifierContext};
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\StaticMethodTypeSpecifyingExtension;
 use Tester\Assert;

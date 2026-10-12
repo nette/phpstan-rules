@@ -5,13 +5,8 @@ namespace Nette\PHPStan\Utils;
 use Nette\Utils\Arrays;
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\ParametersAcceptorSelector;
-use PHPStan\Type\ArrayType;
-use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
-use PHPStan\Type\NullType;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Reflection\{MethodReflection, ParametersAcceptorSelector};
+use PHPStan\Type\{ArrayType, DynamicStaticMethodReturnTypeExtension, NullType, Type, TypeCombinator};
 use function count, in_array;
 
 

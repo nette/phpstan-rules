@@ -2,21 +2,12 @@
 
 namespace Nette\PHPStan\Php;
 
-use PhpParser\Node\Expr;
-use PhpParser\Node\Expr\FuncCall;
-use PhpParser\Node\Expr\MethodCall;
-use PhpParser\Node\Expr\StaticCall;
-use PhpParser\Node\Identifier;
-use PhpParser\Node\Name;
-use PHPStan\Analyser\ArgumentsNormalizer;
-use PHPStan\Analyser\Scope;
-use PHPStan\Reflection\ParametersAcceptorSelector;
-use PHPStan\Reflection\ReflectionProvider;
+use PhpParser\Node\{Expr, Identifier, Name};
+use PhpParser\Node\Expr\{FuncCall, MethodCall, StaticCall};
+use PHPStan\Analyser\{ArgumentsNormalizer, Scope};
+use PHPStan\Reflection\{ParametersAcceptorSelector, ReflectionProvider};
 use PHPStan\Type\Constant\ConstantBooleanType;
-use PHPStan\Type\DynamicReturnTypeExtensionRegistry;
-use PHPStan\Type\ExpressionTypeResolverExtension;
-use PHPStan\Type\Type;
-use PHPStan\Type\TypeCombinator;
+use PHPStan\Type\{DynamicReturnTypeExtensionRegistry, ExpressionTypeResolverExtension, Type, TypeCombinator};
 use function in_array, strlen;
 
 

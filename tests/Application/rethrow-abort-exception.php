@@ -2,8 +2,7 @@
 
 namespace Tests\Application;
 
-use Nette\Application\AbortException;
-use Nette\Application\BadRequestException;
+use Nette\Application\{AbortException, BadRequestException};
 use Nette\Application\UI\Presenter;
 
 

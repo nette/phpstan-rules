@@ -2,16 +2,12 @@
 
 namespace Nette\PHPStan\Schema;
 
-use Nette\Schema\Elements\Structure;
-use Nette\Schema\Elements\Type;
-use Nette\Schema\Expect;
-use Nette\Schema\Schema;
+use Nette\Schema\Elements\{Structure, Type};
+use Nette\Schema\{Expect, Schema};
 use PhpParser\Node\Expr\StaticCall;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\DynamicStaticMethodReturnTypeExtension;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\Type as PhpStanType;
+use PHPStan\Type\{DynamicStaticMethodReturnTypeExtension, ObjectType, Type as PhpStanType};
 
 
 /**

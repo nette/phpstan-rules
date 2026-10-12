@@ -3,11 +3,8 @@
 namespace Nette\PHPStan\Php;
 
 use PhpParser\Node;
-use PhpParser\Node\Expr;
-use PhpParser\Node\Identifier;
-use PHPStan\Analyser\Error;
-use PHPStan\Analyser\IgnoreErrorExtension;
-use PHPStan\Analyser\Scope;
+use PhpParser\Node\{Expr, Identifier};
+use PHPStan\Analyser\{Error, IgnoreErrorExtension, Scope};
 
 
 /**

@@ -3,16 +3,10 @@
 namespace Nette\PHPStan\Utils;
 
 use Nette\Utils\Html;
-use PHPStan\Reflection\ClassMemberReflection;
-use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\FunctionVariant;
-use PHPStan\Reflection\MethodReflection;
-use PHPStan\Reflection\MethodsClassReflectionExtension;
+use PHPStan\Reflection\{ClassMemberReflection, ClassReflection, FunctionVariant, MethodReflection, MethodsClassReflectionExtension};
 use PHPStan\TrinaryLogic;
 use PHPStan\Type\Generic\TemplateTypeMap;
-use PHPStan\Type\MixedType;
-use PHPStan\Type\StaticType;
-use PHPStan\Type\Type;
+use PHPStan\Type\{MixedType, StaticType, Type};
 use function in_array, strlen;
 
 

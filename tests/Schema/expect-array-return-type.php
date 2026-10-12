@@ -1,7 +1,6 @@
 <?php declare(strict_types=1);
 
-use Nette\Schema\Elements\Structure;
-use Nette\Schema\Elements\Type;
+use Nette\Schema\Elements\{Structure, Type};
 use Nette\Schema\Expect;
 use function PHPStan\Testing\assertType;
 

@@ -4,11 +4,7 @@ namespace Nette\PHPStan\Utils;
 
 use Nette\Utils\Strings;
 use PhpParser\Node\Expr\StaticCall;
-use PHPStan\Analyser\Scope;
-use PHPStan\Analyser\SpecifiedTypes;
-use PHPStan\Analyser\TypeSpecifier;
-use PHPStan\Analyser\TypeSpecifierAwareExtension;
-use PHPStan\Analyser\TypeSpecifierContext;
+use PHPStan\Analyser\{Scope, SpecifiedTypes, TypeSpecifier, TypeSpecifierAwareExtension, TypeSpecifierContext};
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Php\RegexArrayShapeMatcher;
 use PHPStan\Type\StaticMethodTypeSpecifyingExtension;
