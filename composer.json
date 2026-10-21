@@ -1,9 +1,9 @@
 {
 	"name": "nette/phpstan-rules",
 	"type": "phpstan-extension",
-	"description": "🐘 PHPStan rules and type extensions for Nette libraries",
-	"homepage": "https://nette.org",
-	"keywords": ["phpstan", "nette", "static analysis"],
+	"description": "🐘 PHPStan Rules: makes PHPStan understand Nette, with precise return types, typed database rows and fewer false positives.",
+	"homepage": "https://doc.nette.org/tools/phpstan-rules",
+	"keywords": ["phpstan", "nette", "static analysis", "phpstan extension", "phpstan rules", "type inference"],
 	"license": ["BSD-3-Clause", "GPL-2.0-only", "GPL-3.0-only"],
 	"authors": [
 		{
