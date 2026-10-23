@@ -113,6 +113,11 @@ Nette packages). Its non-local invariants are expensive to rediscover:
   `ComponentTreeResolver`'s AST walk finds nothing.
 - Containers are cached per config+file hash; the analyzed file is also added to
   `analysedPaths` so classes defined *in the fixture* are in reflection scope.
+- Opcache is switched off before any analysis. PHPStan's `AutoloadSourceLocator` finds a
+  class by running the autoloader under a stream wrapper that traps the file read, and
+  opcache serves an already cached script without reading the file, so the file really
+  executes and reflection breaks. Under php-cgi on Windows the cache is shared by the
+  parallel test processes, so it depends on what another test loaded first.
 - **What runs vs not:** because these call `Analyser`/`NodeScopeResolver` directly,
   custom rules and `IgnoreErrorExtension`s run, but config-level `ignoreErrors` (the Forms
   event-handler suppression) runs in a higher pipeline layer and is **not** covered —

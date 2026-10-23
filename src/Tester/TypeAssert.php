@@ -189,6 +189,9 @@ class TypeAssert
 	 */
 	private static function createContainer(array $configFiles, ?string $analysedFile = null): Container
 	{
+		// the source locator traps autoloaded files by a stream wrapper, which opcache bypasses for scripts it has cached
+		ini_set('opcache.enable', '0');
+
 		$configFiles = $configFiles ?: self::getDefaultConfigFiles();
 		$cacheKey = hash('sha256', implode("\n", $configFiles) . "\n" . $analysedFile);
 
