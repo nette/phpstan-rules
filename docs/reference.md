@@ -160,6 +160,19 @@ via `Callback::toReflection` and coerces values, so a narrower data param is val
 the value containing `Closure(`/`callable(`; `reportUnmatched: false`. Not covered by
 `TypeAssert` (config-level ignoreErrors runs above `Analyser`) - verified by real projects.
 
+### Compatibility aliases (bootstrap file, not a PHP extension)
+
+`src/bootstrap.php`, registered in `bootstrapFiles`. Nette declares an old class name in its
+`compatibility*.php` files under `if (false)`, an empty class or interface carrying only
+`@deprecated`, and creates it at runtime by `class_alias()`. PHPStan finds that declaration
+through the Composer classmap and takes it for the class, so `new Nette\DI\Statement(...)`
+reports `new.noConstructor` and the name is unrelated to the class it stands for. The bootstrap
+autoloads every `Nette\` class the classmap maps to a `compatibility*` file, so PHPStan reflects
+the alias as the aliased class. An alias whose target needs a missing package is caught, and the
+rest of its file stays unloaded. Without Composer in the process (DressCode as a phar runs
+bootstrap files too) it does nothing. Side effect: PHPStan itself no longer sees the
+`@deprecated` of such names (IDEs and DressCode read the declaration and still do).
+
 ### AssertTypeNarrowingExtension
 
 `StaticMethodTypeSpecifyingExtension` + `TypeSpecifierAwareExtension`. Narrows variable types

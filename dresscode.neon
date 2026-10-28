@@ -22,3 +22,6 @@ overrides:
 		use:
 			- compilerOptimizations
 			- deprecations
+	-
+		paths: [tests/DI/compatibility-alias.php]
+		upgrading: {api: keep}

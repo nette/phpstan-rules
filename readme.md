@@ -76,6 +76,8 @@ parameters:
 
 **False positive suppression** — silences known PHPStan false positives in Nette patterns (arrow functions passed as `void` callbacks, runtime type validation closures, callbacks assigned to Form event-handler properties like `$onSuccess`, `$onClick`).
 
+**Old class names** — the deprecated names Nette keeps as aliases (e.g. `Nette\DI\Statement` for `Nette\DI\Definitions\Statement`) are understood as the classes they stand for, so code still using them is analysed without false errors such as a missing constructor.
+
  <!---->
 
 ### Type Assertion Testing Helper
