@@ -178,8 +178,10 @@ bootstrap files too) it does nothing. Side effect: PHPStan itself no longer sees
 `StaticMethodTypeSpecifyingExtension` + `TypeSpecifierAwareExtension`. Narrows variable types
 after `Tester\Assert` calls by mapping each assertion to an equivalent expression and delegating
 to `TypeSpecifier::specifyTypesInCondition()`. Supports `null`, `notNull`, `true`, `false`,
-`truthy`, `falsey`, `same`, `notSame`, `type` (built-in type strings and class/interface names).
-A shipped feature, not test-only.
+`truthy`, `falsey`, `nan`, `same`, `notSame`, `count` (`array|Countable` with `count() === $n`),
+`hasKey`/`hasNotKey` (`array_key_exists()`), `type` (built-in type strings including `list`,
+class/interface names, a union of constant strings → `||` of the checks, or an object →
+`instanceof` its class). A shipped feature, not test-only.
 
 ### Assets family (`MapperTypeResolver` shared service)
 
