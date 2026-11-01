@@ -142,3 +142,47 @@ function testTypeInterface(mixed $val): void
 	Assert::type(Countable::class, $val);
 	assertType('Countable', $val);
 }
+
+
+function testTypeLeadingBackslash(mixed $val): void
+{
+	Assert::type('\\stdClass', $val);
+	assertType('stdClass', $val);
+}
+
+
+function testTypeEmptyString(mixed $val): void
+{
+	Assert::type('', $val);
+	assertType('mixed', $val);
+}
+
+
+/**
+ * @param  array<int, mixed>  $args
+ */
+function testUnpackedArguments(array $args): void
+{
+	Assert::null(...$args);
+	assertType('array<int, mixed>', $args);
+
+	Assert::same(...$args);
+	assertType('array<int, mixed>', $args);
+}
+
+
+function testNamedArguments(mixed $val): void
+{
+	Assert::null(description: 'must be null', actual: $val);
+	assertType('null', $val);
+}
+
+
+function testUnresolvableNamedArguments(?string $description): void
+{
+	Assert::null(description: $description);
+	assertType('string|null', $description);
+
+	Assert::same(description: $description, expected: 1);
+	assertType('string|null', $description);
+}

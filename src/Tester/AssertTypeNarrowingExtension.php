@@ -43,7 +43,18 @@ class AssertTypeNarrowingExtension implements StaticMethodTypeSpecifyingExtensio
 			'same', 'notSame', 'type' => 2,
 			default => null,
 		};
-		return $minArgs !== null && count($node->getArgs()) >= $minArgs;
+		if ($minArgs === null || $node->isFirstClassCallable() || count($node->getArgs()) < $minArgs) {
+			return false;
+		}
+
+		// named arguments are left unresolved only in an invalid call
+		foreach (array_slice($node->getArgs(), 0, $minArgs) as $arg) {
+			if ($arg->unpack || $arg->name !== null) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 
@@ -105,9 +116,14 @@ class AssertTypeNarrowingExtension implements StaticMethodTypeSpecifyingExtensio
 				default => null,
 			};
 
-			return $func !== null
-				? new FuncCall(new Name($func), [$args[1]])
-				: new Instanceof_($args[1]->value, new Name($typeName));
+			if ($func !== null) {
+				return new FuncCall(new Name($func), [$args[1]]);
+			}
+
+			$className = ltrim($typeName, '\\');
+			return $className === ''
+				? null
+				: new Instanceof_($args[1]->value, new Name($className));
 		}
 
 		// object argument → instanceof using its class
