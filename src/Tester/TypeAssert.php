@@ -144,7 +144,6 @@ class TypeAssert
 				$expectedType->describe(VerbosityLevel::precise()),
 				$node->getStartLine(),
 			));
-			return null;
 		}
 
 		$actualType = $scope->getType($node->getArgs()[1]->value);

@@ -9,6 +9,12 @@ parameters:
 		- Nette\Security\SimpleIdentity
 		- Nette\Utils\Html
 
+	earlyTerminatingMethodCalls:
+		# fail() returns void because an Assert::$onFailure handler may swallow the failure,
+		# but like every other assertion it is meant to end the test
+		Tester\Assert:
+			- fail
+
 	ignoreErrors:
 		-
 			# Form event-handler callbacks (onSuccess, onClick, ...) receive data coerced

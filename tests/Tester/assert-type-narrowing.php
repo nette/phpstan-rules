@@ -142,3 +142,12 @@ function testTypeInterface(mixed $val): void
 	Assert::type(Countable::class, $val);
 	assertType('Countable', $val);
 }
+
+
+function testFailTerminates(?int $val): void
+{
+	if ($val === null) {
+		Assert::fail('must not be null');
+	}
+	assertType('int', $val);
+}

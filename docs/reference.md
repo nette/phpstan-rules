@@ -181,6 +181,13 @@ to `TypeSpecifier::specifyTypesInCondition()`. Supports `null`, `notNull`, `true
 `truthy`, `falsey`, `same`, `notSame`, `type` (built-in type strings and class/interface names).
 A shipped feature, not test-only.
 
+### Assert::fail() as early-terminating (earlyTerminatingMethodCalls, not a PHP extension)
+
+`Tester\Assert::fail()` is listed in `earlyTerminatingMethodCalls`, so code after it is
+unreachable and narrowing holds (`if ($x === null) Assert::fail(...)` leaves `$x` non-null). It
+can't be native `never`: an `Assert::$onFailure` handler may swallow the failure and continue.
+Consistent with the type-narrowing assertions, which assume the same.
+
 ### Assets family (`MapperTypeResolver` shared service)
 
 `MapperTypeResolver` resolves mapper IDs → mapper class types from a `mapping` config
