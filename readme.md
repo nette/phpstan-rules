@@ -66,6 +66,8 @@ parameters:
 
 **Injected properties** — properties marked with the `#[Nette\DI\Attributes\Inject]` attribute are treated as initialized and written, so PHPStan won't report them as uninitialized or never written.
 
+**Compiler extension hooks** — methods of a compiler extension marked with the `#[Nette\DI\Attributes\Hook]` attribute are called by Nette DI through reflection, so PHPStan won't report a private hook method as unused.
+
 **Invalid regex detection** — reports invalid regular expression patterns passed to `Strings::match()`, `matchAll()`, `split()`, and `replace()`, so a malformed pattern is caught during analysis instead of at runtime.
 
 **AbortException safety** — warns when a broad `catch (\Throwable)` or `catch (\Exception)` in a try block that calls `redirect()`, `forward()`, `terminate()`, etc. swallows `Nette\Application\AbortException` instead of rethrowing it — a mistake that silently breaks redirects.

@@ -28,6 +28,11 @@ TypeAssert::assertTypes(__DIR__ . '/ComponentModel/get-component-return-type.php
 // DI
 TypeAssert::assertNoErrors(__DIR__ . '/DI/inject-property.php');
 TypeAssert::assertNoErrors(__DIR__ . '/DI/compatibility-alias.php');
+TypeAssert::assertErrors(__DIR__ . '/DI/hook-method.php', [
+	'method.unused on line 41',
+	'method.unused on line 46',
+	'method.unused on line 55',
+]);
 
 // Forms
 TypeAssert::assertTypes(__DIR__ . '/Forms/form-component-return-type.php');

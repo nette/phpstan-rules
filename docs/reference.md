@@ -205,6 +205,15 @@ always-written and initialized (`isAlwaysWritten()`/`isInitialized()` → true, 
 `never written`/`uninitialized`); `isAlwaysRead()` stays false. Matches the attribute FQCN as a
 string (no compile-time nette/di dependency). Only `#[Inject]`, not the legacy `@inject`.
 
+### HookMethodExtension
+
+`AlwaysUsedMethodExtension`, tag `phpstan.methods.alwaysUsedMethodExtension`. Treats methods
+marked with `#[Nette\DI\Attributes\Hook]` (nette/di 3.3+) as used, suppressing `method.unused`
+for private phase handlers, which `CompilerExtension` finds by reflection. Only in a subclass of
+`Nette\DI\CompilerExtension`: elsewhere the attribute is never read, so the method really is
+unused and stays reported. The attribute FQCN is a plain string, as the class is missing with
+nette/di < 3.3.
+
 ### ValidRegularExpressionRule
 
 `Rule<StaticCall>`, tag `phpstan.rules.rule` - the first custom **rule**. Reports invalid regex

@@ -71,6 +71,9 @@ services:
 	-
 		create: Nette\PHPStan\DI\InjectPropertyExtension
 		tags: [phpstan.properties.readWriteExtension]
+	-
+		create: Nette\PHPStan\DI\HookMethodExtension
+		tags: [phpstan.methods.alwaysUsedMethodExtension]
 
 	# nette/forms
 	-
